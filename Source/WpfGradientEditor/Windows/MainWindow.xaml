@@ -1,0 +1,51 @@
+﻿<Window 
+    x:Class="Xam.Applications.GradientEditor.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lc="clr-namespace:Xam.Applications.GradientEditor.Controls"
+    Title="{Binding Path=DisplayTitle,Mode=OneWay}" 
+    FontFamily="Verdana"
+    WindowStartupLocation="CenterScreen"
+    Height="800" Width="580"
+    MinHeight="600" MinWidth="580">
+    <Window.Resources>
+        <ResourceDictionary Source="MainWindowResources.xaml"/>
+    </Window.Resources>
+    <Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="52"/>
+                <ColumnDefinition Width="68"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="24"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock HorizontalAlignment="Right">Bands:</TextBlock>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Right">Editing band:</TextBlock>
+            <TextBlock Grid.Column="3" Text="{Binding ElementName=GradControl, Path=CurrentEditBand, Mode=OneWay}"/>
+            
+            <ComboBox
+                Grid.Row="0" Grid.Column="1" 
+                ItemsSource="{Binding ElementName=GradControl, Path=Bands.AvailableBands, Mode=OneWay}" 
+                SelectedItem="{Binding ElementName=GradControl, Path=Bands.SelectedBandCount}"/>
+
+            <lc:GradientControl 
+                x:Name="GradControl" 
+                Grid.Row="1" Grid.ColumnSpan="4" 
+                ShiftColorsButtons="True"
+                Margin="4,12" />
+
+            <TextBox
+                Grid.Row="2" Grid.ColumnSpan="4"
+                IsReadOnly="{Binding ElementName=GradControl, Path=IsTwoWay, Mode=OneWay, Converter={StaticResource InverseBooleanConverter}}"
+                Text="{Binding ElementName=GradControl, Path=XamlOutput, Mode=OneWay}"
+                Style="{StaticResource TextBoxXaml}" />
+            
+        </Grid>
+    </Border>
+</Window>
