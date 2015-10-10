@@ -14,4 +14,4 @@ from the Extended WPF Toolkit™ Community Edition project and use those.
 ##Screenshots
 ![WPF Gradient Editor Screenshot 1](http://media.victordavid.com/img/wpfge/screenshot1.png)
 
-![WPF Gradient Editor Screenshot 2](http://media.victordavid.com/img/wpfge/screenshot1.png)
+![WPF Gradient Editor Screenshot 2](http://media.victordavid.com/img/wpfge/screenshot2.png)
