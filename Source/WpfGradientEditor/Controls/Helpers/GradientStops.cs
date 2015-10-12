@@ -12,24 +12,24 @@ namespace Xam.Applications.GradientEditor.Controls
     /// <summary>
     /// Provides helper services for managing gradient bands and current band selection.
     /// </summary>
-    public class GradientBands : INotifyPropertyChanged
+    public class GradientStops : INotifyPropertyChanged
     {
         #region Private Vars
-        private int selectedBandCount;
-        private int currentEditBand;
+        private int selectedStopsCount;
+        private int currentEditStop;
         #endregion
 
         /************************************************************************/
         
         #region Public Fields
         /// <summary>
-        /// Provides the property name for the SelectedBandCount property.
+        /// Provides the property name for the SelectedStopsCount property.
         /// </summary>
-        public const string SelectedBandCountPropertyName = "SelectedBandCount";
+        public const string SelectedStopsCountPropertyName = "SelectedStopsCount";
         /// <summary>
-        /// Provides the property name for the CurrentEditBand property.
+        /// Provides the property name for the CurrentEditStop property.
         /// </summary>
-        public const string CurrentEditBandPropertyName = "CurrentEditBand";
+        public const string CurrentEditStopPropertyName = "CurrentEditStop";
         /// <summary>
         /// Provides the property name for the SelectedColor property.
         /// </summary>
@@ -40,48 +40,48 @@ namespace Xam.Applications.GradientEditor.Controls
 
         #region Public Properties
         /// <summary>
-        /// Gets the minimum number of allowed gradient bands.
+        /// Gets the minimum number of allowed gradient stops.
         /// </summary>
-        public int MinBands
+        public int MinStops
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Gets the maximum number of allowed gradient bands.
+        /// Gets the maximum number of allowed gradient stops.
         /// </summary>
-        public int MaxBands
+        public int MaxStops
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Gets the list of available bands.
+        /// Gets the list of available stops.
         /// </summary>
-        public int[] AvailableBands
+        public int[] AvailableStops
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Gets or sets the selected band count.
+        /// Gets or sets the selected stops count.
         /// </summary>
-        public int SelectedBandCount
+        public int SelectedStopsCount
         {
-            get { return selectedBandCount; }
+            get { return selectedStopsCount; }
             set
             {
-                if (value != selectedBandCount)
+                if (value != selectedStopsCount)
                 {
-                    if (value < MinBands || value > MaxBands)
+                    if (value < MinStops || value > MaxStops)
                     {
-                        throw new ArgumentOutOfRangeException(Strings.ArgumentException_SelectedBandCount, innerException: null);
+                        throw new ArgumentOutOfRangeException(Strings.ArgumentException_SelectedStopsCount, innerException: null);
                     }
-                    selectedBandCount = value;
-                    OnPropertyChanged(SelectedBandCountPropertyName);
+                    selectedStopsCount = value;
+                    OnPropertyChanged(SelectedStopsCountPropertyName);
                 }
             }
         }
@@ -89,20 +89,20 @@ namespace Xam.Applications.GradientEditor.Controls
         /// <summary>
         /// Gets or sets the zero-based integer that represents the gradient band that is currently being edited.
         /// </summary>
-        public int CurrentEditBand
+        public int CurrentEditStop
         {
-            get { return currentEditBand; }
+            get { return currentEditStop; }
             set
             {
-                if (value != currentEditBand)
+                if (value != currentEditStop)
                 {
-                    if (value < 0 || value > SelectedBandCount - 1)
+                    if (value < 0 || value > SelectedStopsCount - 1)
                     {
-                        throw new ArgumentOutOfRangeException(String.Format(Strings.ArgumentException_CurrentEditBand, 0, SelectedBandCount - 1), innerException: null);
+                        throw new ArgumentOutOfRangeException(String.Format(Strings.ArgumentException_CurrentEditStop, 0, SelectedStopsCount - 1), innerException: null);
                     }
-                    currentEditBand = value;
+                    currentEditStop = value;
                     OnPropertyChanged(SelectedColorPropertyName);
-                    OnPropertyChanged(CurrentEditBandPropertyName);
+                    OnPropertyChanged(CurrentEditStopPropertyName);
                 }
             }
         }
@@ -121,12 +121,12 @@ namespace Xam.Applications.GradientEditor.Controls
         /// </summary>
         public Color? SelectedColor
         {
-            get { return Colors[currentEditBand]; }
+            get { return Colors[currentEditStop]; }
             set
             {
                 if (value.HasValue)
                 {
-                    Colors[currentEditBand] = (Color)value;
+                    Colors[currentEditStop] = (Color)value;
                 }
                 OnPropertyChanged(SelectedColorPropertyName);
             }
@@ -137,13 +137,13 @@ namespace Xam.Applications.GradientEditor.Controls
 
         #region Constructor
 
-        public GradientBands(int minBands, int maxBands)
+        public GradientStops(int minStops, int maxStops)
         {
-            if (minBands < 2) throw new ArgumentOutOfRangeException(Strings.ArgumentException_MinimumBands, innerException: null);
-            if (maxBands < minBands + 1) throw new ArgumentOutOfRangeException(Strings.ArgumentException_MaximumBands, innerException: null);
-            MinBands = minBands;
-            MaxBands = maxBands;
-            AvailableBands = Enumerable.Range(MinBands, MaxBands - 1).ToArray();
+            if (minStops < 2) throw new ArgumentOutOfRangeException(Strings.ArgumentException_MinimumStops, innerException: null);
+            if (maxStops < minStops + 1) throw new ArgumentOutOfRangeException(Strings.ArgumentException_MaximumStops, innerException: null);
+            MinStops = minStops;
+            MaxStops = maxStops;
+            AvailableStops = Enumerable.Range(MinStops, MaxStops - 1).ToArray();
 
             // The first 6 colors are simply predefined.
             Colors = new List<Color>();
@@ -155,12 +155,12 @@ namespace Xam.Applications.GradientEditor.Controls
             Colors.Add(System.Windows.Media.Colors.MediumVioletRed);
 
             // After 6 colors, we'll just grab some random ones.
-            if (maxBands > 6)
+            if (maxStops > 6)
             {
                 Random rand = new Random();
                 byte a = 0, r = 0, g = 0, b = 0;
 
-                for (int k = 0; k < maxBands - 6; k++)
+                for (int k = 0; k < maxStops - 6; k++)
                 {
                     a = (byte)rand.Next(127, 256);
                     r = (byte)rand.Next(0, 256);
@@ -172,7 +172,7 @@ namespace Xam.Applications.GradientEditor.Controls
             }
 
             // must set the private backing var here to avoid triggering the property change.
-            selectedBandCount = minBands;
+            selectedStopsCount = minStops;
         }
         #endregion
 

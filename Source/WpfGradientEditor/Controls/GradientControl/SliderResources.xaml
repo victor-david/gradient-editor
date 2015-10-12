@@ -21,6 +21,7 @@
         <GradientStop Color="White" Offset=".9"/>
     </LinearGradientBrush>
 
+    <!-- Slider: RepeatButton (base) style -->
     <Style TargetType="RepeatButton" x:Key="RepeatButtonBase">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
@@ -101,6 +102,18 @@
         </Setter>
     </Style>
 
+    <!-- Slider: RepeatButton (stop point) style -->
+    <Style TargetType="RepeatButton" x:Key="RepeatButtonStopPoint" BasedOn="{StaticResource RepeatButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border Background="Transparent"></Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <!-- Slider: Thumb style -->
     <Style TargetType="Thumb" x:Key="ThumbBase">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -128,8 +141,8 @@
         <Setter Property="Width" Value="4"/>
     </Style>
 
-    <!-- Slider: Horizontal template -->
-    <ControlTemplate x:Key="HorizontalSliderTemplate" TargetType="{x:Type Slider}">
+    <!-- Slider: XPoint template -->
+    <ControlTemplate TargetType="Slider" x:Key="XPointSliderTemplate">
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -176,8 +189,8 @@
     </ControlTemplate>
 
 
-    <!-- Slider: Vertical template -->
-    <ControlTemplate TargetType="Slider" x:Key="VerticalSliderTemplate">
+    <!-- Slider: YPoint template -->
+    <ControlTemplate TargetType="Slider" x:Key="YPointSliderTemplate">
         <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -223,9 +236,40 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
-    <!-- Slider: Main style -->
-    <Style TargetType="Slider">
+
+    <!-- Slider: StopPoint template -->
+    <ControlTemplate TargetType="Slider" x:Key="StopPointSliderTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border x:Name="TrackBackground"
+                    Grid.Row="1" Margin="0"
+                    BorderBrush="LightGray" BorderThickness="2"
+                    VerticalAlignment="Center" Height="4" />
+
+            <!-- Must be named PART_Track -->
+            <Track x:Name="PART_Track" Grid.Row="1">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Command="{x:Static Slider.DecreaseLarge}"  Style="{StaticResource RepeatButtonStopPoint}" />
+                </Track.DecreaseRepeatButton>
+
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Command="{x:Static Slider.IncreaseLarge}" Style="{StaticResource RepeatButtonStopPoint}"/>
+                </Track.IncreaseRepeatButton>
+
+                <Track.Thumb>
+                    <Thumb x:Name="Thumb" Style="{StaticResource ThumbBase}" />
+                </Track.Thumb>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+
+    <!-- Slider: base style -->
+    <Style TargetType="Slider" x:Key="SliderBase">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Minimum" Value="0.0"/>
@@ -234,30 +278,31 @@
         <Setter Property="SmallChange" Value="0.1" />
         <Setter Property="TickPlacement" Value="None"/>
         <Setter Property="TickFrequency" Value="0.1"/>
-        <Setter Property="MinWidth" Value="104" />
-        <Setter Property="MinHeight" Value="21" />
-        <Setter Property="Template" Value="{StaticResource HorizontalSliderTemplate}" />
-        <!-- With triggers to set the template, the slider doesn't show in Designer -->
-        <!--<Style.Triggers>
-            <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="MinWidth" Value="104" />
-                <Setter Property="MinHeight" Value="21" />
-                <Setter Property="Template" Value="{StaticResource HorizontalSliderTemplate}" />
-            </Trigger>
-            <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="MinWidth" Value="21" />
-                <Setter Property="MinHeight" Value="104" />
-                <Setter Property="Template" Value="{StaticResource VerticalSliderTemplate}" />
-            </Trigger>
-        </Style.Triggers>-->
     </Style>
 
-    <Style TargetType="Slider" x:Key="VerticalSlider"  BasedOn="{StaticResource {x:Type Slider}}">
+    <!-- Slider: XPoint style -->
+    <Style TargetType="Slider" x:Key="XPointSlider" BasedOn="{StaticResource SliderBase}">
+        <Setter Property="MinWidth" Value="104" />
+        <Setter Property="MinHeight" Value="21" />
+        <Setter Property="Template" Value="{StaticResource XPointSliderTemplate}" />
+    </Style>
+
+    <!-- Slider: YPoint style -->
+    <Style TargetType="Slider" x:Key="YPointSlider"  BasedOn="{StaticResource SliderBase}">
         <Setter Property="Orientation" Value="Vertical"/>
         <Setter Property="IsDirectionReversed" Value="True"/>
         <Setter Property="MinWidth" Value="21" />
         <Setter Property="MinHeight" Value="104" />
-        <Setter Property="Template" Value="{StaticResource VerticalSliderTemplate}" />
+        <Setter Property="Template" Value="{StaticResource YPointSliderTemplate}" />
+    </Style>
+    
+    <!-- Slider: StopPoint style -->
+    <Style TargetType="Slider" x:Key="StopPointSlider" BasedOn="{StaticResource SliderBase}">
+        <Setter Property="SmallChange" Value="0.025"/>
+        <Setter Property="LargeChange" Value="0.025"/>
+        <Setter Property="MinWidth" Value="24"/>
+        <Setter Property="MinHeight" Value="21"/>
+        <Setter Property="Template" Value="{StaticResource StopPointSliderTemplate}" />
     </Style>
 
 </ResourceDictionary>

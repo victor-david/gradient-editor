@@ -61,38 +61,38 @@ namespace Xam.Applications.GradientEditor.Controls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current band must be between {0} and {1}, inclusive.
+        ///   Looks up a localized string similar to Current stop must be between {0} and {1}, inclusive.
         /// </summary>
-        public static string ArgumentException_CurrentEditBand {
+        public static string ArgumentException_CurrentEditStop {
             get {
-                return ResourceManager.GetString("ArgumentException_CurrentEditBand", resourceCulture);
+                return ResourceManager.GetString("ArgumentException_CurrentEditStop", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum bands must be greater than minimim bands.
+        ///   Looks up a localized string similar to Maximum stops must be greater than minimim stops.
         /// </summary>
-        public static string ArgumentException_MaximumBands {
+        public static string ArgumentException_MaximumStops {
             get {
-                return ResourceManager.GetString("ArgumentException_MaximumBands", resourceCulture);
+                return ResourceManager.GetString("ArgumentException_MaximumStops", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum bands must be at least 2.
+        ///   Looks up a localized string similar to Minimum stops must be at least 2.
         /// </summary>
-        public static string ArgumentException_MinimumBands {
+        public static string ArgumentException_MinimumStops {
             get {
-                return ResourceManager.GetString("ArgumentException_MinimumBands", resourceCulture);
+                return ResourceManager.GetString("ArgumentException_MinimumStops", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected band count must be betwwen MinBands and MaxBands, inclusive.
+        ///   Looks up a localized string similar to Selected stop count must be betwwen MinStops and MaxStops, inclusive.
         /// </summary>
-        public static string ArgumentException_SelectedBandCount {
+        public static string ArgumentException_SelectedStopsCount {
             get {
-                return ResourceManager.GetString("ArgumentException_SelectedBandCount", resourceCulture);
+                return ResourceManager.GetString("ArgumentException_SelectedStopsCount", resourceCulture);
             }
         }
         
@@ -115,11 +115,11 @@ namespace Xam.Applications.GradientEditor.Controls {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display band dividers.
+        ///   Looks up a localized string similar to Display stop dividers.
         /// </summary>
-        public static string Label_DisplayBandDividers {
+        public static string Label_DisplayStopDividers {
             get {
-                return ResourceManager.GetString("Label_DisplayBandDividers", resourceCulture);
+                return ResourceManager.GetString("Label_DisplayStopDividers", resourceCulture);
             }
         }
         

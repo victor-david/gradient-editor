@@ -113,7 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Helpers\GradientBands.cs" />
+    <Compile Include="Controls\Helpers\GradientStops.cs" />
     <Compile Include="Controls\GradientControl\GradientControl.xaml.cs">
       <DependentUpon>GradientControl.xaml</DependentUpon>
     </Compile>
@@ -159,6 +159,13 @@
   <ItemGroup>
     <None Include="External\Xceed.Wpf.Toolkit.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WpfControls\WpfControls.csproj">
+      <Project>{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}</Project>
+      <Name>WpfControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

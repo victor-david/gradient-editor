@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGradientEditor", "WpfGradientEditor\WpfGradientEditor.csproj", "{6D514F05-431B-4746-BD7D-7A6E5EFDCB14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControls", "WpfControls\WpfControls.csproj", "{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{6D514F05-431B-4746-BD7D-7A6E5EFDCB14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D514F05-431B-4746-BD7D-7A6E5EFDCB14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D514F05-431B-4746-BD7D-7A6E5EFDCB14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

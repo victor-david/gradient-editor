@@ -1,19 +1,18 @@
 ﻿using System.Reflection;
-using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Markup;
+using System.Windows;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Wpf Gradient Editor")]
-[assembly: AssemblyDescription("Provides visual construction and preview of various linear gradient brushes for use in a WPF application.")]
+[assembly: AssemblyTitle("Wpf Controls Library")]
+[assembly: AssemblyDescription("Provides custom WPF controls")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Restless Animal Productions")]
-[assembly: AssemblyProduct("Wpf Gradient Editor")]
-[assembly: AssemblyCopyright("Produced by Restless Animal Productions 2015, freely available to all")]
+[assembly: AssemblyProduct("WpfControlsLibrary")]
+[assembly: AssemblyCopyright("Copyright © Restless Animal Productions 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,15 +21,8 @@ using System.Windows.Markup;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-//In order to begin building localizable applications, set 
-//<UICulture>CultureYouAreCodingWith</UICulture> in your .csproj file
-//inside a <PropertyGroup>.  For example, if you are using US english
-//in your source files, set the <UICulture> to en-US.  Then uncomment
-//the NeutralResourceLanguage attribute below.  Update the "en-US" in
-//the line below to match the UICulture setting in the project file.
-
-//[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
-
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("78d6116b-ec07-4769-80ef-59a2be2e4b0f")]
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
@@ -42,8 +34,8 @@ using System.Windows.Markup;
 )]
 
 
-[assembly: XmlnsPrefix("http://schemas.xam.com/wpf/apps/xaml/controls", "lc")]
-[assembly: XmlnsDefinition("http://schemas.xam.com/wpf/apps/xaml/controls", "Xam.Applications.GradientEditor.Controls")]
+[assembly: XmlnsPrefix("http://schemas.xam.com/wpf/xaml/controls", "xac")]
+[assembly: XmlnsDefinition("http://schemas.xam.com/wpf/xaml/controls", "Xam.Wpf.Controls")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -55,6 +47,5 @@ using System.Windows.Markup;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.5.0.0")]
-[assembly: AssemblyFileVersion("2.5.0.0")]
-[assembly: GuidAttribute("98300783-db00-4255-80c2-0d3af1a893dc")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

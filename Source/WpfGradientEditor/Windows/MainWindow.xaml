@@ -25,14 +25,12 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <TextBlock HorizontalAlignment="Right">Bands:</TextBlock>
-            <TextBlock Grid.Column="2" HorizontalAlignment="Right">Editing band:</TextBlock>
-            <TextBlock Grid.Column="3" Text="{Binding ElementName=GradControl, Path=CurrentEditBand, Mode=OneWay}"/>
+            <TextBlock HorizontalAlignment="Right">Stops:</TextBlock>
             
             <ComboBox
                 Grid.Row="0" Grid.Column="1" 
-                ItemsSource="{Binding ElementName=GradControl, Path=Bands.AvailableBands, Mode=OneWay}" 
-                SelectedItem="{Binding ElementName=GradControl, Path=Bands.SelectedBandCount}"/>
+                ItemsSource="{Binding ElementName=GradControl, Path=Stops.AvailableStops, Mode=OneWay}" 
+                SelectedItem="{Binding ElementName=GradControl, Path=Stops.SelectedStopsCount}"/>
 
             <lc:GradientControl 
                 x:Name="GradControl" 

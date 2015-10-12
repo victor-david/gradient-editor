@@ -117,17 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArgumentException_CurrentEditBand" xml:space="preserve">
-    <value>Current band must be between {0} and {1}, inclusive</value>
+  <data name="ArgumentException_CurrentEditStop" xml:space="preserve">
+    <value>Current stop must be between {0} and {1}, inclusive</value>
   </data>
-  <data name="ArgumentException_MaximumBands" xml:space="preserve">
-    <value>Maximum bands must be greater than minimim bands</value>
+  <data name="ArgumentException_MaximumStops" xml:space="preserve">
+    <value>Maximum stops must be greater than minimim stops</value>
   </data>
-  <data name="ArgumentException_MinimumBands" xml:space="preserve">
-    <value>Minimum bands must be at least 2</value>
+  <data name="ArgumentException_MinimumStops" xml:space="preserve">
+    <value>Minimum stops must be at least 2</value>
   </data>
-  <data name="ArgumentException_SelectedBandCount" xml:space="preserve">
-    <value>Selected band count must be betwwen MinBands and MaxBands, inclusive</value>
+  <data name="ArgumentException_SelectedStopsCount" xml:space="preserve">
+    <value>Selected stop count must be betwwen MinStops and MaxStops, inclusive</value>
   </data>
   <data name="CommandDescriptionShiftColorsLeft" xml:space="preserve">
     <value>Shift gradient colors to the left</value>
@@ -135,8 +135,8 @@
   <data name="CommandDescriptionShiftColorsRight" xml:space="preserve">
     <value>Shift gradient colors to the right</value>
   </data>
-  <data name="Label_DisplayBandDividers" xml:space="preserve">
-    <value>Display band dividers</value>
+  <data name="Label_DisplayStopDividers" xml:space="preserve">
+    <value>Display stop dividers</value>
   </data>
   <data name="Label_EndPointX" xml:space="preserve">
     <value>End point X</value>
