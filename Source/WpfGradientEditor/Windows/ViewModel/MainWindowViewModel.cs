@@ -35,7 +35,7 @@ namespace Xam.Applications.GradientEditor.ViewModel
         #region Constructor
         public MainWindowViewModel()
         {
-            DisplayTitle = "Wpf Gradient Editor 2.0";
+            DisplayTitle = "Wpf Gradient Editor 3.0";
         }
         #endregion
 
