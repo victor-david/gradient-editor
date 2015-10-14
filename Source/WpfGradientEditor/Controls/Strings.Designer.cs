@@ -97,6 +97,42 @@ namespace Xam.Applications.GradientEditor.Controls {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy the gradient brush xaml to the clipboard.
+        /// </summary>
+        public static string CommandDescriptionCopyXaml {
+            get {
+                return ResourceManager.GetString("CommandDescriptionCopyXaml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease the range of the gradient selector.
+        /// </summary>
+        public static string CommandDescriptionDecreaseGradientRange {
+            get {
+                return ResourceManager.GetString("CommandDescriptionDecreaseGradientRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase the range of the gradient selector.
+        /// </summary>
+        public static string CommandDescriptionIncreaseGradientRange {
+            get {
+                return ResourceManager.GetString("CommandDescriptionIncreaseGradientRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset the gradient parameters to their initial state. Does not affect colors..
+        /// </summary>
+        public static string CommandDescriptionReset {
+            get {
+                return ResourceManager.GetString("CommandDescriptionReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shift gradient colors to the left.
         /// </summary>
         public static string CommandDescriptionShiftColorsLeft {
@@ -111,6 +147,15 @@ namespace Xam.Applications.GradientEditor.Controls {
         public static string CommandDescriptionShiftColorsRight {
             get {
                 return ResourceManager.GetString("CommandDescriptionShiftColorsRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spread the gradient stops evenly within the gradient range.
+        /// </summary>
+        public static string CommandDescriptionSpreadGradientStops {
+            get {
+                return ResourceManager.GetString("CommandDescriptionSpreadGradientStops", resourceCulture);
             }
         }
         

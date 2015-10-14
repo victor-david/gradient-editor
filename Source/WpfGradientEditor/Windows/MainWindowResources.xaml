@@ -5,7 +5,53 @@
 
     <!-- Converters -->
     <l:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-    
+
+    <LinearGradientBrush x:Key="ToolBarBrush1" StartPoint="0.00,0.00" EndPoint="1.00,0.47">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FFE0E0E7" Offset="0.065"/>
+                <GradientStop Color="#FFCBBF8E" Offset="0.360"/>
+                <GradientStop Color="#FFECECFB" Offset="1.000"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ToolBarBrush2" StartPoint="0.00,0.00" EndPoint="1.00,1.00">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FF776A58" Offset="0.000"/>
+                <GradientStop Color="#FF17175D" Offset="0.333"/>
+                <GradientStop Color="#FFD3D3D3" Offset="0.667"/>
+                <GradientStop Color="#FF0A0A28" Offset="1.000"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ToolBarBrush3" StartPoint="0.92,1.00" EndPoint="0.92,0.00">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FFF5FFFA" Offset="-0.100"/>
+                <GradientStop Color="#FF95959E" Offset="0.200"/>
+                <GradientStop Color="#FFAB9E8F" Offset="0.500"/>
+                <GradientStop Color="#FF81818A" Offset="0.846"/>
+                <GradientStop Color="#FFD3D3D3" Offset="1.031"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <Style TargetType="ToolBarTray">
+        <Setter Property="Background" Value="Transparent"/>
+        
+    </Style>
+
+    <Style TargetType="ToolBar">
+        <Setter Property="Background" Value="{StaticResource ToolBarBrush1}"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Margin" Value="-3,-1,0, 0"/>
+        <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type ToolBarTray}}}"/>
+    </Style>
+
     <Style TargetType="Border">
         <Setter Property="Background">
             <Setter.Value>
@@ -30,11 +76,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="DarkBlue"/>
     </Style>
-    
-    <Style TargetType="ComboBox">
-        <Setter Property="Margin" Value="6,0"/>
-    </Style>
-    
+   
     <Style TargetType="TextBox" x:Key="TextBoxXaml">
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -43,4 +85,5 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Margin" Value="4,12"/>
     </Style>
+
 </ResourceDictionary>

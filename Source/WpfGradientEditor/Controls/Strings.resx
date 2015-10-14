@@ -129,11 +129,26 @@
   <data name="ArgumentException_SelectedStopsCount" xml:space="preserve">
     <value>Selected stop count must be betwwen MinStops and MaxStops, inclusive</value>
   </data>
+  <data name="CommandDescriptionCopyXaml" xml:space="preserve">
+    <value>Copy the gradient brush xaml to the clipboard</value>
+  </data>
+  <data name="CommandDescriptionDecreaseGradientRange" xml:space="preserve">
+    <value>Decrease the range of the gradient selector</value>
+  </data>
+  <data name="CommandDescriptionIncreaseGradientRange" xml:space="preserve">
+    <value>Increase the range of the gradient selector</value>
+  </data>
+  <data name="CommandDescriptionReset" xml:space="preserve">
+    <value>Reset the gradient parameters to their initial state. Does not affect colors.</value>
+  </data>
   <data name="CommandDescriptionShiftColorsLeft" xml:space="preserve">
     <value>Shift gradient colors to the left</value>
   </data>
   <data name="CommandDescriptionShiftColorsRight" xml:space="preserve">
     <value>Shift gradient colors to the right</value>
+  </data>
+  <data name="CommandDescriptionSpreadGradientStops" xml:space="preserve">
+    <value>Spread the gradient stops evenly within the gradient range</value>
   </data>
   <data name="Label_DisplayStopDividers" xml:space="preserve">
     <value>Display stop dividers</value>

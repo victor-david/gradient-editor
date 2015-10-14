@@ -5,6 +5,17 @@
 
     <!-- Converters -->
     <l:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+
+    <!-- Fill Brushes -->
+    <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.51,0.00" EndPoint="0.50,1.00">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#FFC3C3CC" Offset="0.000"/>
+                <GradientStop Color="#FF403931" Offset="0.971"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
     
     <Style TargetType="Grid">
         <Setter Property="Margin" Value="0"/>
@@ -13,15 +24,52 @@
     <Style TargetType="Rectangle">
         <Setter Property="Stroke" Value="DarkGray"/>
     </Style>
-    
-    <Style TargetType="GridSplitter">
-        <Setter Property="Width" Value="1"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="Background" Value="#666"/>
-        <Setter Property="ShowsPreview" Value="True"/>
+
+    <Style TargetType="HeaderedContentControl">
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Border 
+                        Background="#E8E8E8" 
+                        BorderBrush="#CCC" 
+                        BorderThickness="1" 
+                        CornerRadius="2" 
+                        Margin="0,0,0,4" Padding="2" 
+                        SnapsToDevicePixels="True">
+                        <TextBlock 
+                            FontSize="12"
+                            Foreground="DarkBlue" 
+                            HorizontalAlignment="Left"  
+                            Text="{TemplateBinding Content}" />
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- This template ensures that content of a HeaderedContentControl fills the available vertical space. -->
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <DockPanel>
+                        <ContentPresenter 
+                            DockPanel.Dock="Top"
+                            ContentSource="Header" 
+                            ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                        
+                        <ContentPresenter 
+                            ContentSource="Content" 
+                            ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-    
+
+    <Style TargetType="TextBlock" x:Key="TextBlockMinMax">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Blue"/>
+    </Style>
     
     <Style TargetType="Border">
         <Setter Property="BorderBrush" Value="Transparent"/>

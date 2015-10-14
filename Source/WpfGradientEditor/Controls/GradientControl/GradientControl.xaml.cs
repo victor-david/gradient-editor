@@ -32,7 +32,6 @@ namespace Xam.Applications.GradientEditor.Controls
         private double startPointY;
         private double endPointX;
         private double endPointY;
-        private bool shiftColorsButtons;
         #endregion
 
         /************************************************************************/
@@ -42,18 +41,23 @@ namespace Xam.Applications.GradientEditor.Controls
         /// Provides the property name for the CurrentBrush property.
         /// </summary>
         public const string CurrentBrushPropertyName = "CurrentBrush";
-        ///// <summary>
-        ///// Provides the property name for the TotalColumns property.
-        ///// </summary>
-        //public const string TotalColumnsPropertyName = "TotalColumns";
         /// <summary>
-        /// Provides the property name for the CurrenEditBand property.
+        /// Provides the property name for the CurrenEditStop property.
         /// </summary>
         public const string CurrentEditStopPropertyName = "CurrentEditStop";
         /// <summary>
         /// Provides the property name for the XamlOutput property.
         /// </summary>
         public const string XamlOutputPropertyName = "XamlOutput";
+        /// <summary>
+        /// Gets the amount of expansion that is applied when invoking the IncreaseGradientRangeCommand.
+        /// </summary>
+        public const double RangeIncreaseAmount = 0.1;
+        /// <summary>
+        /// Gets the amount of contraction that is applied when invoking the DecreaseGradientRangeCommand.
+        /// </summary>
+        public const double RangeDecreaseAmount = 0.1;
+
         #endregion
 
         /************************************************************************/
@@ -66,20 +70,6 @@ namespace Xam.Applications.GradientEditor.Controls
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Gets or sets a boolean value that indicates whether the shift colors buttons are available on the control.
-        /// The default is true.
-        /// </summary>
-        public bool ShiftColorsButtons
-        {
-            get { return shiftColorsButtons; }
-            set
-            {
-                shiftColorsButtons = value;
-                OnPropertyChanged("ShiftColorsButtons");
-            }
         }
 
         /// <summary>
@@ -116,6 +106,51 @@ namespace Xam.Applications.GradientEditor.Controls
         }
 
         /// <summary>
+        /// Gets the command to increase the gradient range.
+        /// </summary>
+        public RelayCommand IncreaseGradientRangeCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to decrease the gradient range.
+        /// </summary>
+        public RelayCommand DecreaseGradientRangeCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to spread the gradient stops evenly throughout the gradient range.
+        /// </summary>
+        public RelayCommand SpreadGradientStopsCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to reset the control to its beginning state.
+        /// </summary>
+        public RelayCommand ResetCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to copy the Xaml output to the clipboard.
+        /// </summary>
+        public RelayCommand CopyXamlCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Gets or sets the starting X cooridinate
         /// </summary>
         public double StartPointX
@@ -133,7 +168,6 @@ namespace Xam.Applications.GradientEditor.Controls
                 }
             }
         }
-
 
         /// <summary>
         /// Gets or sets the starting Y cooridinate
@@ -240,15 +274,20 @@ namespace Xam.Applications.GradientEditor.Controls
             EndPointX = 1.0;
             EndPointY = 1.0;
 
-            ShiftColorsButtons = true;
             ShiftColorsLeftCommand = new RelayCommand(ShiftColorsLeftExecute, null, Strings.CommandDescriptionShiftColorsLeft);
             ShiftColorsRightCommand = new RelayCommand(ShiftColorsRightExecute, null, Strings.CommandDescriptionShiftColorsRight);
+            IncreaseGradientRangeCommand = new RelayCommand(IncreaseGradientRangeExecute, IncreaseGradientRangeCanExecute, Strings.CommandDescriptionIncreaseGradientRange);
+            DecreaseGradientRangeCommand = new RelayCommand(DecreaseGradientRangeExecute, DecreaseGradientRangeCanExecute, Strings.CommandDescriptionDecreaseGradientRange);
+            SpreadGradientStopsCommand = new RelayCommand(SpreadGradientStopsExecute, null, Strings.CommandDescriptionSpreadGradientStops);
+            ResetCommand = new RelayCommand(ResetExecute, null, Strings.CommandDescriptionReset);
+            CopyXamlCommand = new RelayCommand(CopyXamlExecute, null, Strings.CommandDescriptionCopyXaml);
 
             Stops.SelectedStopsCount = MultiSlider.DefaultSliderCount;
 
             StopsControl.SliderSet += StopsControlSlidersSet;
             StopsControl.ValueChanged += StopsControlValueChanged;
             StopsControl.SliderSelected += StopsControlSliderSelected;
+            ToolBar b;
         }
         #endregion
 
@@ -384,6 +423,50 @@ namespace Xam.Applications.GradientEditor.Controls
             UpdateCurrentBrush(StopsControl.SliderValues);
             Stops.SelectedColor = Stops.Colors[Stops.CurrentEditStop];
         }
+
+        private bool IncreaseGradientRangeCanExecute(object o)
+        {
+            return StopsControl.Minimum > -0.6d;
+        }
+
+        private void IncreaseGradientRangeExecute(object o)
+        {
+            StopsControl.Minimum = Math.Round(StopsControl.Minimum - RangeIncreaseAmount, 1);
+            StopsControl.Maximum = Math.Round(StopsControl.Maximum + RangeIncreaseAmount, 1);
+        }
+
+        private bool DecreaseGradientRangeCanExecute(object o)
+        {
+            return StopsControl.Minimum < 0.0d;
+        }
+
+        private void DecreaseGradientRangeExecute(object o)
+        {
+            StopsControl.Minimum = Math.Round(StopsControl.Minimum + RangeDecreaseAmount, 1);
+            StopsControl.Maximum = Math.Round(StopsControl.Maximum - RangeDecreaseAmount, 1);
+        }
+
+        private void SpreadGradientStopsExecute(object o)
+        {
+            StopsControl.SpreadSliders();
+        }
+
+        private void ResetExecute(object o)
+        {
+            StopsControl.Minimum = 0.0;
+            StopsControl.Maximum = 1.0;
+            StartPointX = 0.0;
+            StartPointY = 0.0;
+            EndPointX = 1.0;
+            EndPointY = 1.0;
+            StopsControl.SpreadSliders();
+        }
+
+        private void CopyXamlExecute(object o)
+        {
+        }
+
+
         #endregion
     }
 }
