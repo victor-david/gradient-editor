@@ -84,7 +84,23 @@
                     </HeaderedContentControl>
                     
                     <Separator/>
-                    
+
+                    <!-- Messages -->
+                    <TextBlock Text="{Binding ElementName=GradControl, Path=OperationMessage, Mode=OneWay}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockOpMessage}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=GradControl, Path=OperationMessageCreated}" Value="True">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard Storyboard="{StaticResource StoryboardFadeIn}"/>
+                                            <BeginStoryboard Storyboard="{StaticResource StoryboardFadeOut}"/>
+                                        </DataTrigger.EnterActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
                 </ToolBar>
             </ToolBarTray>
             

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:xac="http://schemas.xam.com/wpf/xaml/controls">
+    xmlns:xac="http://schemas.xam.com/wpf/xaml/controls"
+    xmlns:l="clr-namespace:Xam.Applications.GradientEditor">
     
     <!-- Resources for items inside a ToolBar -->
     
@@ -61,10 +62,25 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+    <!-- Storyboard used to fade the text message in -->
+    <Storyboard x:Key="StoryboardFadeIn">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.350"/>
+    </Storyboard>
+    
+    <!-- Storyboard used to fade the text message out -->
+    <Storyboard x:Key="StoryboardFadeOut">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:7.0"/>
+    </Storyboard>
+
+    <Style TargetType="TextBlock" x:Key="TextBlockOpMessage" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="Margin" Value="2,0,0,8"/>
+        <Setter Property="Foreground" Value="#D00"/>
+    </Style>
+
     <!-- Separator of a Toolbar, must use static Resource key from Toolbar -->
     <Style TargetType="Separator" x:Key="{x:Static ToolBar.SeparatorStyleKey}">
         <Setter Property="Margin" Value="8,2"/>
-        <Setter Property="Background" Value="#DDD"/>
+        <Setter Property="Background" Value="#CCC"/>
         <Setter Property="Width" Value="3"/>
     </Style>
 

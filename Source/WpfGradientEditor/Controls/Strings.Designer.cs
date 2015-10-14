@@ -203,5 +203,23 @@ namespace Xam.Applications.GradientEditor.Controls {
                 return ResourceManager.GetString("Label_StartPointY", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameters reset.
+        /// </summary>
+        public static string OperationMessageReset {
+            get {
+                return ResourceManager.GetString("OperationMessageReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xaml copied to clipboard.
+        /// </summary>
+        public static string OperationMessageXamlCopiedToClipboard {
+            get {
+                return ResourceManager.GetString("OperationMessageXamlCopiedToClipboard", resourceCulture);
+            }
+        }
     }
 }

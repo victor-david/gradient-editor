@@ -178,7 +178,6 @@
                             <Setter TargetName="MainTextBlock" Property="Margin" Value="0"/>
                         </Trigger>
                         <Trigger Property="ImageSource" Value="{x:Null}">
-                            <!--<Setter TargetName="MainImage" Property="Visibility" Value="Collapsed"/>-->
                             <Setter TargetName="MainImage" Property="Width" Value="0"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

@@ -32,6 +32,8 @@ namespace Xam.Applications.GradientEditor.Controls
         private double startPointY;
         private double endPointX;
         private double endPointY;
+        private string operationMessage;
+        private bool operationMessageCreated;
         #endregion
 
         /************************************************************************/
@@ -49,6 +51,14 @@ namespace Xam.Applications.GradientEditor.Controls
         /// Provides the property name for the XamlOutput property.
         /// </summary>
         public const string XamlOutputPropertyName = "XamlOutput";
+        /// <summary>
+        /// Provides the property name for the OperationMessage property
+        /// </summary>
+        public const string OperationMessagePropertyName = "OperationMessage";
+        /// <summary>
+        /// Provides the property name for the OperationMessageCreated property
+        /// </summary>
+        public const string OperationMessageCreatedPropertyName = "OperationMessageCreated";
         /// <summary>
         /// Gets the amount of expansion that is applied when invoking the IncreaseGradientRangeCommand.
         /// </summary>
@@ -254,6 +264,36 @@ namespace Xam.Applications.GradientEditor.Controls
                 OnPropertyChanged(XamlOutputPropertyName);
             }
         }
+
+        /// <summary>
+        /// Gets the operation message from the control
+        /// </summary>
+        public string OperationMessage
+        {
+            get { return operationMessage; }
+            private set
+            {
+                operationMessage = value;
+                OnPropertyChanged(OperationMessagePropertyName);
+                OperationMessageCreated = true;
+                OperationMessageCreated = false;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets the operation message from the control
+        /// </summary>
+        public bool OperationMessageCreated
+        {
+            get { return operationMessageCreated; }
+            private set
+            {
+                operationMessageCreated = value;
+                OnPropertyChanged(OperationMessageCreatedPropertyName);
+            }
+        }
+
         #endregion
 
         /************************************************************************/
@@ -449,6 +489,7 @@ namespace Xam.Applications.GradientEditor.Controls
         private void SpreadGradientStopsExecute(object o)
         {
             StopsControl.SpreadSliders();
+            OperationMessage = null;
         }
 
         private void ResetExecute(object o)
@@ -460,10 +501,13 @@ namespace Xam.Applications.GradientEditor.Controls
             EndPointX = 1.0;
             EndPointY = 1.0;
             StopsControl.SpreadSliders();
+            OperationMessage = Strings.OperationMessageReset;
         }
 
         private void CopyXamlExecute(object o)
         {
+            Clipboard.SetText(XamlOutput);
+            OperationMessage = Strings.OperationMessageXamlCopiedToClipboard;
         }
 
 

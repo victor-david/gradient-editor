@@ -165,4 +165,10 @@
   <data name="Label_StartPointY" xml:space="preserve">
     <value>Start point Y</value>
   </data>
+  <data name="OperationMessageReset" xml:space="preserve">
+    <value>Parameters reset</value>
+  </data>
+  <data name="OperationMessageXamlCopiedToClipboard" xml:space="preserve">
+    <value>Xaml copied to clipboard</value>
+  </data>
 </root>

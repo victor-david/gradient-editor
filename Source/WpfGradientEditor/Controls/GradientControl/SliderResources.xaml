@@ -120,7 +120,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border Background="#070" BorderBrush="DarkGray" BorderThickness="1" Height="15" Width="17" CornerRadius="4"/>
+                    <Border Name="MainBorder" Background="#070" BorderBrush="DarkGray" BorderThickness="1" Height="15" Width="15" CornerRadius="4"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background" Value="#0A0"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseCaptureWithin" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background" Value="#0C0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
