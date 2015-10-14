@@ -5,7 +5,29 @@
 
     <!-- Converters -->
     <l:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-    
+
+    <LinearGradientBrush x:Key="ToolBarBrush" StartPoint="0.00,0.00" EndPoint="1.00,1.00">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#40A2A2A2" Offset="0.000"/>
+                <GradientStop Color="#40CCCCB7" Offset="1.000"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <Style TargetType="ToolBarTray">
+        <Setter Property="Background" Value="Transparent"/>
+        
+    </Style>
+
+    <Style TargetType="ToolBar">
+        <Setter Property="Background" Value="{StaticResource ToolBarBrush}"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Margin" Value="-3,-1,0, 0"/>
+        <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type ToolBarTray}}}"/>
+    </Style>
+
     <Style TargetType="Border">
         <Setter Property="Background">
             <Setter.Value>
@@ -31,10 +53,6 @@
         <Setter Property="Foreground" Value="DarkBlue"/>
     </Style>
     
-    <Style TargetType="ComboBox">
-        <Setter Property="Margin" Value="6,0"/>
-    </Style>
-    
     <Style TargetType="TextBox" x:Key="TextBoxXaml">
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -43,4 +61,5 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Margin" Value="4,12"/>
     </Style>
+
 </ResourceDictionary>

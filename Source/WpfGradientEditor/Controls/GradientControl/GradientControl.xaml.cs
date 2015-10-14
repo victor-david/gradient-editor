@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Diagnostics;
 using Xceed.Wpf.Toolkit;
+using Xam.Wpf.Controls;
 
 namespace Xam.Applications.GradientEditor.Controls
 {
@@ -23,19 +24,16 @@ namespace Xam.Applications.GradientEditor.Controls
     public partial class GradientControl : UserControl, INotifyPropertyChanged
     {
         #region Private Vars
-        private const int minBands = 2;
-        private const int maxBands = 16;
+        private const int minStops = MultiSlider.MinSliderCount;
+        private const int maxStops = MultiSlider.MaxSliderCount;
         private LinearGradientBrush currentBrush;
         private string xamlOutput;
-        private int waitForSizeChangeCount;
-        private int sizeChangeCount;
         private double startPointX;
         private double startPointY;
         private double endPointX;
         private double endPointY;
-        private bool shiftColorsButtons;
-        private bool displayBandDividers;
-        private bool isTwoWay;
+        private string operationMessage;
+        private bool operationMessageCreated;
         #endregion
 
         /************************************************************************/
@@ -46,43 +44,42 @@ namespace Xam.Applications.GradientEditor.Controls
         /// </summary>
         public const string CurrentBrushPropertyName = "CurrentBrush";
         /// <summary>
-        /// Provides the property name for the TotalColumns property.
+        /// Provides the property name for the CurrenEditStop property.
         /// </summary>
-        public const string TotalColumnsPropertyName = "TotalColumns";
-        /// <summary>
-        /// Provides the property name for the CurrenEditBand property.
-        /// </summary>
-        public const string CurrentEditBandPropertyName = "CurrentEditBand";
+        public const string CurrentEditStopPropertyName = "CurrentEditStop";
         /// <summary>
         /// Provides the property name for the XamlOutput property.
         /// </summary>
         public const string XamlOutputPropertyName = "XamlOutput";
+        /// <summary>
+        /// Provides the property name for the OperationMessage property
+        /// </summary>
+        public const string OperationMessagePropertyName = "OperationMessage";
+        /// <summary>
+        /// Provides the property name for the OperationMessageCreated property
+        /// </summary>
+        public const string OperationMessageCreatedPropertyName = "OperationMessageCreated";
+        /// <summary>
+        /// Gets the amount of expansion that is applied when invoking the IncreaseGradientRangeCommand.
+        /// </summary>
+        public const double RangeIncreaseAmount = 0.1;
+        /// <summary>
+        /// Gets the amount of contraction that is applied when invoking the DecreaseGradientRangeCommand.
+        /// </summary>
+        public const double RangeDecreaseAmount = 0.1;
+
         #endregion
 
         /************************************************************************/
         
         #region Public Properties
         /// <summary>
-        /// Gets the Bands object that represents band information about the available gradient bands.
+        /// Gets the GradientStops object that represents band information about the available gradient bands.
         /// </summary>
-        public GradientBands Bands
+        public GradientStops Stops
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Gets or sets a boolean value that indicates whether the shift colors buttons are available on the control.
-        /// The default is true.
-        /// </summary>
-        public bool ShiftColorsButtons
-        {
-            get { return shiftColorsButtons; }
-            set
-            {
-                shiftColorsButtons = value;
-                OnPropertyChanged("ShiftColorsButtons");
-            }
         }
 
         /// <summary>
@@ -92,7 +89,7 @@ namespace Xam.Applications.GradientEditor.Controls
         /// </summary>
         public bool IsTwoWay
         {
-            get { return isTwoWay; }
+            get { return false; }
             set
             {
                 //isTwoWay = value;
@@ -119,6 +116,51 @@ namespace Xam.Applications.GradientEditor.Controls
         }
 
         /// <summary>
+        /// Gets the command to increase the gradient range.
+        /// </summary>
+        public RelayCommand IncreaseGradientRangeCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to decrease the gradient range.
+        /// </summary>
+        public RelayCommand DecreaseGradientRangeCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to spread the gradient stops evenly throughout the gradient range.
+        /// </summary>
+        public RelayCommand SpreadGradientStopsCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to reset the control to its beginning state.
+        /// </summary>
+        public RelayCommand ResetCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the command to copy the Xaml output to the clipboard.
+        /// </summary>
+        public RelayCommand CopyXamlCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Gets or sets the starting X cooridinate
         /// </summary>
         public double StartPointX
@@ -136,7 +178,6 @@ namespace Xam.Applications.GradientEditor.Controls
                 }
             }
         }
-
 
         /// <summary>
         /// Gets or sets the starting Y cooridinate
@@ -196,19 +237,11 @@ namespace Xam.Applications.GradientEditor.Controls
         }
 
         /// <summary>
-        /// Gets the total number of columns currently in the control.
-        /// </summary>
-        public int TotalColumns
-        {
-            get { return Bands.SelectedBandCount + Bands.SelectedBandCount - 1; }
-        }
-
-        /// <summary>
         /// Gets the current editing band in a friendly one-based manner. 
         /// </summary>
-        public int CurrentEditBand
+        public int CurrentEditStop
         {
-            get { return Bands.CurrentEditBand + 1; }
+            get { return Stops.CurrentEditStop + 1; }
         }
 
         /// <summary>
@@ -217,20 +250,6 @@ namespace Xam.Applications.GradientEditor.Controls
         public LinearGradientBrush CurrentBrush
         {
             get { return currentBrush; }
-        }
-
-        /// <summary>
-        /// Gets or sets a value that determines if the grid band dividers are visible.
-        /// </summary>
-        public bool DisplayBandDividers
-        {
-            get { return displayBandDividers; }
-            set
-            {
-                displayBandDividers = value;
-                SetBandDividersVisibility(displayBandDividers);
-                OnPropertyChanged("DisplayGridDividers");
-            }
         }
 
         /// <summary>
@@ -245,6 +264,36 @@ namespace Xam.Applications.GradientEditor.Controls
                 OnPropertyChanged(XamlOutputPropertyName);
             }
         }
+
+        /// <summary>
+        /// Gets the operation message from the control
+        /// </summary>
+        public string OperationMessage
+        {
+            get { return operationMessage; }
+            private set
+            {
+                operationMessage = value;
+                OnPropertyChanged(OperationMessagePropertyName);
+                OperationMessageCreated = true;
+                OperationMessageCreated = false;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets the operation message from the control
+        /// </summary>
+        public bool OperationMessageCreated
+        {
+            get { return operationMessageCreated; }
+            private set
+            {
+                operationMessageCreated = value;
+                OnPropertyChanged(OperationMessageCreatedPropertyName);
+            }
+        }
+
         #endregion
 
         /************************************************************************/
@@ -255,10 +304,8 @@ namespace Xam.Applications.GradientEditor.Controls
             InitializeComponent();
             DataContext = this;
 
-            Bands = new GradientBands(minBands, maxBands);
-            Bands.PropertyChanged += new PropertyChangedEventHandler(BandsPropertyChanged);
-
-            InitializeGrid(maxBands);
+            Stops = new GradientStops(minStops, maxStops);
+            Stops.PropertyChanged += new PropertyChangedEventHandler(StopsPropertyChanged);
 
             currentBrush = new LinearGradientBrush();
 
@@ -267,16 +314,21 @@ namespace Xam.Applications.GradientEditor.Controls
             EndPointX = 1.0;
             EndPointY = 1.0;
 
-            ShiftColorsButtons = true;
             ShiftColorsLeftCommand = new RelayCommand(ShiftColorsLeftExecute, null, Strings.CommandDescriptionShiftColorsLeft);
             ShiftColorsRightCommand = new RelayCommand(ShiftColorsRightExecute, null, Strings.CommandDescriptionShiftColorsRight);
+            IncreaseGradientRangeCommand = new RelayCommand(IncreaseGradientRangeExecute, IncreaseGradientRangeCanExecute, Strings.CommandDescriptionIncreaseGradientRange);
+            DecreaseGradientRangeCommand = new RelayCommand(DecreaseGradientRangeExecute, DecreaseGradientRangeCanExecute, Strings.CommandDescriptionDecreaseGradientRange);
+            SpreadGradientStopsCommand = new RelayCommand(SpreadGradientStopsExecute, null, Strings.CommandDescriptionSpreadGradientStops);
+            ResetCommand = new RelayCommand(ResetExecute, null, Strings.CommandDescriptionReset);
+            CopyXamlCommand = new RelayCommand(CopyXamlExecute, null, Strings.CommandDescriptionCopyXaml);
 
-            Bands.SelectedBandCount = 3;
-            SetCurrentEditBandVisual(Bands.CurrentEditBand);
+            Stops.SelectedStopsCount = MultiSlider.DefaultSliderCount;
 
-            DisplayBandDividers = true;
+            StopsControl.SliderSet += StopsControlSlidersSet;
+            StopsControl.ValueChanged += StopsControlValueChanged;
+            StopsControl.SliderSelected += StopsControlSliderSelected;
+            ToolBar b;
         }
-
         #endregion
 
         /************************************************************************/
@@ -302,108 +354,28 @@ namespace Xam.Applications.GradientEditor.Controls
         }
         #endregion
 
+
         /************************************************************************/
 
         #region Private Methods
-        private void InitializeGrid(int maxBands)
+        private void UpdateCurrentBrush(List<double> offsets)
         {
-            // Create the selected-band indicators
-            for (int k = 0; k < maxBands; k++)
-            {
-                Border border = new Border();
-                Grid.SetColumn(border, k * 2);
-                Grid.SetRow(border, 1);
-                DisplayGrid.Children.Add(border);
-            }
-
-            // Create the grid splitters
-            for (int k = 0; k < maxBands - 1; k++)
-            {
-                GridSplitter splitter = new GridSplitter();
-                Grid.SetColumn(splitter, k * 2 + 1);
-                Grid.SetRowSpan(splitter, 2);
-                DisplayGrid.Children.Add(splitter);
-            }
-        }
-
-        private void CreateColumnDefinitions(int numBands)
-        {
-            var widthDescriptor = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ItemsControl));
-            
-            DisplayGrid.ColumnDefinitions.Clear();
-            int totalCols = numBands * 2 - 1;
-            for (int colIdx = 0; colIdx < totalCols; colIdx++)
-            {
-                ColumnDefinition def = new ColumnDefinition();
-                if (colIdx % 2 == 1)
-                {
-                    // splitter column
-                    def.Width = GridLength.Auto;
-                }
-                else
-                {
-                    // not a splitter column
-                    def.Width = new GridLength(1, GridUnitType.Star);
-                    widthDescriptor.AddValueChanged(def, WidthChanged);
-
-                }
-                DisplayGrid.ColumnDefinitions.Add(def);
-            }
-
-            int splitterCount = 0;
-            foreach (GridSplitter splitter in DisplayGrid.Children.OfType<GridSplitter>())
-            {
-                splitterCount++;
-                splitter.Visibility = (splitterCount < numBands && displayBandDividers) ? Visibility.Visible : Visibility.Collapsed;
-            }
-
-            OnPropertyChanged(TotalColumnsPropertyName);
-            waitForSizeChangeCount = numBands;
-            sizeChangeCount = 0;
-            Bands.CurrentEditBand = 0;
-        }
-
-        private void SetCurrentEditBandVisual(int currentEditBand)
-        {
-            int borderCount = 0;
-            foreach (Border splitter in DisplayGrid.Children.OfType<Border>())
-            {
-                splitter.Visibility = (borderCount == currentEditBand) ? Visibility.Visible : Visibility.Collapsed;
-                borderCount++;
-            }
-        }
-
-        private void WidthChanged(object sender, EventArgs e)
-        {
-            ColumnDefinition def = sender as ColumnDefinition;
-            if (def != null)
-            {
-                sizeChangeCount++;
-                if (sizeChangeCount == waitForSizeChangeCount)
-                {
-                    waitForSizeChangeCount = 2;
-                    sizeChangeCount = 0;
-                    UpdateCurrentBrush(Bands.SelectedBandCount);
-                }
-            }
-        }
-
-        private void UpdateCurrentBrush(int numBands)
-        {
-            var offsets = GetOffsets(numBands);
-            while (currentBrush.GradientStops.Count > numBands)
+            int numStops = offsets.Count;
+            while (currentBrush.GradientStops.Count > numStops)
             {
                 currentBrush.GradientStops.RemoveAt(currentBrush.GradientStops.Count - 1);
             }
 
-            while (currentBrush.GradientStops.Count < numBands)
+            while (currentBrush.GradientStops.Count < numStops)
             {
                 currentBrush.GradientStops.Add(new GradientStop());
             }
 
-            for (int k = 0; k < numBands; k++)
+            double div = 1.0 / numStops;
+
+            for (int k = 0; k < numStops; k++)
             {
-                currentBrush.GradientStops[k].Color = Bands.Colors[k];
+                currentBrush.GradientStops[k].Color = Stops.Colors[k];
                 currentBrush.GradientStops[k].Offset = offsets[k];
             }
 
@@ -411,45 +383,22 @@ namespace Xam.Applications.GradientEditor.Controls
             CreateXamlOutput(currentBrush);
         }
 
-        private List<double> GetOffsets(int numBands)
+
+        private void StopsControlSlidersSet(object sender, MultiSliderSetRoutedEventArgs e)
         {
-            List<double> widths = GetColumnWidthsSansSplitters();
-
-            //Debug.WriteLine("Widths sum is {0}", widths.Sum());
-
-            // Before any resize, each col def will have a value of 1.0
-            if (widths.Sum() == numBands)
-            {
-                return GetDefaultOffsets(numBands);
-            }
-
-            List<double> list = new List<double>();
-            list.Add(0.0);
-            double wip = 0.0;
-            
-            for (int k = 1; k < widths.Count; k++)
-            {
-                wip += widths[k-1];
-                double offset = wip / widths.Sum();
-                list.Add(offset);
-            }
-
-            return list;
+            UpdateCurrentBrush(e.SliderValues);
         }
 
-        /// <summary>
-        /// Gets default offsets, evenly divided between the bands.
-        /// </summary>
-        /// <returns></returns>
-        private List<double> GetDefaultOffsets(int numBands)
+        private void StopsControlValueChanged(object sender, MultiSliderRoutedEventArgs e)
         {
-            List<double> list = new List<double>();
-            list.Add(0.0);
-            for (int k = 1; k < numBands; k++)
-            {
-                list.Add(1.0 / numBands * k);
-            }
-            return list;
+            currentBrush.GradientStops[e.Position].Offset = e.SliderValues[e.Position];
+            OnPropertyChanged(CurrentBrushPropertyName);
+            CreateXamlOutput(currentBrush);
+        }
+
+        private void StopsControlSliderSelected(object sender, MultiSliderRoutedEventArgs e)
+        {
+            Stops.CurrentEditStop = e.Position;
         }
 
         private void CreateXamlOutput(LinearGradientBrush brush)
@@ -473,93 +422,92 @@ namespace Xam.Applications.GradientEditor.Controls
             XamlOutput = b.ToString();
         }
 
-        private void MainRectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void StopsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Point mousePoint = e.GetPosition(MainRectangle);
-            double mouseOffset = mousePoint.X / MainRectangle.ActualWidth;
-            List<double> offsets = GetOffsets(Bands.SelectedBandCount);
-            int editBand = 0;
-
-            for (int k = 1; k < offsets.Count; k++)
+            if (e.PropertyName == GradientStops.SelectedStopsCountPropertyName)
             {
-                if (mouseOffset < offsets[k])
-                {
-                    Bands.CurrentEditBand = editBand;
-                    return;
-                }
-                editBand = Math.Min(editBand + 1, Bands.SelectedBandCount - 1);
-            }
-            // set to last band
-            Bands.CurrentEditBand = editBand;
-        }
-
-        private List<double> GetColumnWidthsSansSplitters()
-        {
-            List<double> widths = new List<double>();
-
-            for (int colIdx = 0; colIdx < DisplayGrid.ColumnDefinitions.Count; colIdx++)
-            {
-                if (colIdx % 2 == 0)
-                {
-                    // not a splitter column
-                    widths.Add(DisplayGrid.ColumnDefinitions[colIdx].Width.Value);
-                }
+                StopsControl.SliderCount = Stops.SelectedStopsCount;
             }
 
-            return widths;
-        }
-
-        private void BandsPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == GradientBands.SelectedBandCountPropertyName)
+            if (e.PropertyName == GradientStops.SelectedColorPropertyName)
             {
-                CreateColumnDefinitions(Bands.SelectedBandCount);
-                UpdateCurrentBrush(Bands.SelectedBandCount);
+                UpdateCurrentBrush(StopsControl.SliderValues);
             }
 
-            if (e.PropertyName == GradientBands.SelectedColorPropertyName)
+            if (e.PropertyName == GradientStops.CurrentEditStopPropertyName)
             {
-                UpdateCurrentBrush(Bands.SelectedBandCount);
-            }
-
-            if (e.PropertyName == GradientBands.CurrentEditBandPropertyName)
-            {
-                SetCurrentEditBandVisual(Bands.CurrentEditBand);
-                OnPropertyChanged(CurrentEditBandPropertyName);
+                OnPropertyChanged(CurrentEditStopPropertyName);
             }
         }
 
         private void ShiftColorsLeftExecute(object o)
         {
-            Color temp = Bands.Colors[0];
-            for (int k = 0; k < Bands.SelectedBandCount - 1; k++)
+            Color temp = Stops.Colors[0];
+            for (int k = 0; k < Stops.SelectedStopsCount - 1; k++)
             {
-                Bands.Colors[k] = Bands.Colors[k + 1];
+                Stops.Colors[k] = Stops.Colors[k + 1];
             }
-            Bands.Colors[Bands.SelectedBandCount - 1] = temp;
-            UpdateCurrentBrush(Bands.SelectedBandCount);
-            Bands.SelectedColor = Bands.Colors[Bands.CurrentEditBand];
+            Stops.Colors[Stops.SelectedStopsCount - 1] = temp;
+            UpdateCurrentBrush(StopsControl.SliderValues);
+            Stops.SelectedColor = Stops.Colors[Stops.CurrentEditStop];
         }
 
         private void ShiftColorsRightExecute(object o)
         {
-            Color temp = Bands.Colors[Bands.SelectedBandCount - 1];
-            for (int k = Bands.SelectedBandCount - 1; k > 0; k--)
+            Color temp = Stops.Colors[Stops.SelectedStopsCount - 1];
+            for (int k = Stops.SelectedStopsCount - 1; k > 0; k--)
             {
-                Bands.Colors[k] = Bands.Colors[k - 1];
+                Stops.Colors[k] = Stops.Colors[k - 1];
             }
-            Bands.Colors[0] = temp;
-            UpdateCurrentBrush(Bands.SelectedBandCount);
-            Bands.SelectedColor = Bands.Colors[Bands.CurrentEditBand];
+            Stops.Colors[0] = temp;
+            UpdateCurrentBrush(StopsControl.SliderValues);
+            Stops.SelectedColor = Stops.Colors[Stops.CurrentEditStop];
         }
 
-        private void SetBandDividersVisibility(bool visible)
+        private bool IncreaseGradientRangeCanExecute(object o)
         {
-            GridSplitter[] splitters =  DisplayGrid.Children.OfType<GridSplitter>().ToArray<GridSplitter>();
-            for (int k = 0; k < Bands.SelectedBandCount - 1; k++)
-            {
-                splitters[k].Visibility = (visible) ? Visibility.Visible : Visibility.Collapsed;
-            }
+            return StopsControl.Minimum > -0.6d;
+        }
+
+        private void IncreaseGradientRangeExecute(object o)
+        {
+            StopsControl.Minimum = Math.Round(StopsControl.Minimum - RangeIncreaseAmount, 1);
+            StopsControl.Maximum = Math.Round(StopsControl.Maximum + RangeIncreaseAmount, 1);
+        }
+
+        private bool DecreaseGradientRangeCanExecute(object o)
+        {
+            return StopsControl.Minimum < 0.0d;
+        }
+
+        private void DecreaseGradientRangeExecute(object o)
+        {
+            StopsControl.Minimum = Math.Round(StopsControl.Minimum + RangeDecreaseAmount, 1);
+            StopsControl.Maximum = Math.Round(StopsControl.Maximum - RangeDecreaseAmount, 1);
+        }
+
+        private void SpreadGradientStopsExecute(object o)
+        {
+            StopsControl.SpreadSliders();
+            OperationMessage = null;
+        }
+
+        private void ResetExecute(object o)
+        {
+            StopsControl.Minimum = 0.0;
+            StopsControl.Maximum = 1.0;
+            StartPointX = 0.0;
+            StartPointY = 0.0;
+            EndPointX = 1.0;
+            EndPointY = 1.0;
+            StopsControl.SpreadSliders();
+            OperationMessage = Strings.OperationMessageReset;
+        }
+
+        private void CopyXamlExecute(object o)
+        {
+            Clipboard.SetText(XamlOutput);
+            OperationMessage = Strings.OperationMessageXamlCopiedToClipboard;
         }
         #endregion
     }

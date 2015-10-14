@@ -77,14 +77,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\GradientControl\CheckBoxResources.xaml">
+    <Page Include="Unused\CheckBoxResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GradientControl\ShiftButtonResources.xaml">
+    <None Include="Unused\ShiftButtonResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
     <Page Include="Controls\GradientControl\SliderResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,7 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Helpers\GradientBands.cs" />
+    <Compile Include="Controls\Helpers\GradientStops.cs" />
     <Compile Include="Controls\GradientControl\GradientControl.xaml.cs">
       <DependentUpon>GradientControl.xaml</DependentUpon>
     </Compile>
@@ -127,6 +127,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\ToolBarResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -153,11 +157,33 @@
     <None Include="External\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Controls\Images\Image.Arrow.Left.72.png" />
-    <Resource Include="Controls\Images\Image.Arrow.Right.72.png" />
+    <Resource Include="Windows\Images\Image.Arrow.Left.72.png" />
+    <Resource Include="Windows\Images\Image.Arrow.Right.72.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="External\Xceed.Wpf.Toolkit.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WpfControls\WpfControls.csproj">
+      <Project>{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}</Project>
+      <Name>WpfControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Unused\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\Image.Minus.72.png" />
+    <Resource Include="Windows\Images\Image.Plus.72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\Image.Clipboard.72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\Image.Reset.72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\Image.Spread.72.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

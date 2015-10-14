@@ -5,109 +5,84 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:lc="clr-namespace:Xam.Applications.GradientEditor.Controls"
-    xmlns:xc="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+    xmlns:xac="http://schemas.xam.com/wpf/xaml/controls"
+    xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
     mc:Ignorable="d" 
-    d:DesignHeight="480" d:DesignWidth="430">
-
+    d:DesignHeight="380" d:DesignWidth="536">
+    
     <Control.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="GradientControlResources.xaml"/>
                 <ResourceDictionary Source="SliderResources.xaml"/>
-                <ResourceDictionary Source="ShiftButtonResources.xaml"/>
-                <ResourceDictionary Source="CheckBoxResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Control.Resources>
 
-    <!-- Outer grid -->
+    <!-- Main grid -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="32"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
+            <!--<RowDefinition Height="*"/>-->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="32"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="32"/>
         </Grid.ColumnDefinitions>
-        <!-- Grid that holds the display rectangle and the band splitters -->
-        <Grid Grid.Row="1" Grid.Column="1" Name="DisplayGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="152"/>
-                <RowDefinition Height="18"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Rectangle 
-                Name="MainRectangle"
-                Fill="{Binding CurrentBrush}" 
-                Grid.ColumnSpan="{Binding Path=TotalColumns, Mode=OneWay}"
-                MouseLeftButtonDown="MainRectangleMouseLeftButtonDown" />
-        </Grid>
+
+        <!-- Color controls -->
+        <HeaderedContentControl Grid.Row="1" Header="Selected Gradient Stop Color">
+            <xc:ColorCanvas 
+                Grid.Row="1" Grid.Column="0"
+                HorizontalAlignment="Left"
+                SelectedColor="{Binding Path=Stops.SelectedColor}"/>
+        </HeaderedContentControl>
+        <!-- Gradient display rectangle -->
+        <Rectangle Name="MainRectangle"
+                   Grid.Row="1" Grid.Column="2"
+                   Fill="{Binding CurrentBrush}"/>
+
+        <TextBlock 
+            Grid.Row="2" Grid.Column="1"
+            Style="{StaticResource TextBlockMinMax}"
+            Text="{Binding ElementName=StopsControl, Path=Minimum}"/>
+        
+        <TextBlock
+            Grid.Row="2" Grid.Column="3"
+            Style="{StaticResource TextBlockMinMax}"
+            Text="{Binding ElementName=StopsControl, Path=Maximum}"/>
+        
+        <!-- Multi slider to set the gradient stops -->
+        <xac:MultiSlider x:Name="StopsControl" Grid.Row="2" Grid.Column="2"/>
+
         <!-- slider to adjust start point x -->
-        <Slider Grid.Row="0" Grid.Column="1"
+        <Slider Style="{StaticResource XPointSlider}" 
+                Grid.Row="0" Grid.Column="2"
                 ToolTip="{x:Static lc:Strings.Label_StartPointX}"
                 Value="{Binding Path=StartPointX}"/>
         
         <!-- slider to adjust start point y -->
-        <Slider Style="{StaticResource VerticalSlider}"
-                Grid.Row="1" Grid.Column="0" 
+        <Slider Style="{StaticResource YPointSlider}"
+                Grid.Row="1" Grid.Column="1" 
                 ToolTip="{x:Static lc:Strings.Label_StartPointY}"
                 Value="{Binding Path=StartPointY}"/>
 
         <!-- slider to adjust end point x -->
-        <Slider Grid.Row="2" Grid.Column="1" 
+        <Slider Style="{StaticResource XPointSlider}" 
+                Grid.Row="3" Grid.Column="2" 
                 ToolTip="{x:Static lc:Strings.Label_EndPointX}"
                 Value="{Binding Path=EndPointX}" />
 
         <!-- slider to adjust end point y -->
-        <Slider Style="{StaticResource VerticalSlider}"
-                Grid.Row="1" Grid.Column="2" 
+        <Slider Style="{StaticResource YPointSlider}"
+                Grid.Row="1" Grid.Column="3" 
                 ToolTip="{x:Static lc:Strings.Label_EndPointY}"
                 Value="{Binding Path=EndPointY}"/>
-        
-        <!-- Bottom control grid -->
-        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="32"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <!-- nothing yet -->
-            </Grid.RowDefinitions>
 
-            <!-- Color controls -->
-            <xc:ColorCanvas 
-                Grid.Column="1"
-                HorizontalAlignment="Left"
-                SelectedColor="{Binding Path=Bands.SelectedColor}"/>
-
-            <Button
-                Grid.Column="2"
-                Command="{Binding Path=ShiftColorsLeftCommand}"
-                ToolTip="{Binding Path=ShiftColorsLeftCommand.Description}"
-                Style="{StaticResource ButtonArrowShiftLeft}"
-                Visibility="{Binding Path=ShiftColorsButtons, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-
-            <Button 
-                Grid.Column="3"
-                Command="{Binding Path=ShiftColorsRightCommand}"
-                ToolTip="{Binding Path=ShiftColorsRightCommand.Description}"
-                Style="{StaticResource ButtonArrowShiftRight}"
-                Visibility="{Binding Path=ShiftColorsButtons, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-
-            <CheckBox
-                Grid.Column="4"
-                Content="{x:Static lc:Strings.Label_DisplayBandDividers}"
-                VerticalAlignment="Top"
-                IsChecked="{Binding Path=DisplayBandDividers}"/>
-
-        </Grid>
     </Grid>
 </UserControl>

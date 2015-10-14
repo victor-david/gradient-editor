@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Images -->
-    <BitmapImage x:Key="ImageArrowLeft" UriSource="/WpfGradientEditor;component/Controls/Images/Image.Arrow.Left.72.png"/>
-    <BitmapImage x:Key="ImageArrowRight" UriSource="/WpfGradientEditor;component/Controls/Images/Image.Arrow.Right.72.png"/>
+    <BitmapImage x:Key="ImageArrowLeft" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Arrow.Left.72.png"/>
+    <BitmapImage x:Key="ImageArrowRight" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Arrow.Right.72.png"/>
 
     <ControlTemplate TargetType="Button" x:Key="TemplateButtonArrowShiftLeft">
         <Border x:Name="Border" CornerRadius="7">
@@ -12,7 +12,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="Yellow"/>
+                <Setter TargetName="Border" Property="Background" Value="#FFE2DF59"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
                 <Setter TargetName="Border" Property="Margin" Value="-2,0,2,0" />
@@ -26,7 +26,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="Yellow"/>
+                <Setter TargetName="Border" Property="Background" Value="#FFE2DF59"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
                 <Setter TargetName="Border" Property="Margin" Value="2,0,-2,0" />
@@ -38,24 +38,28 @@
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Margin" Value="6,3"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
     <Style TargetType="Button" x:Key="ButtonArrowShiftLeft" BasedOn="{StaticResource ButtonArrowShiftBase}">
         <Setter Property="Template" Value="{StaticResource TemplateButtonArrowShiftLeft}"/>
-        <Setter Property="Content">
+        <Setter Property="ContentTemplate">
             <Setter.Value>
-                <Image Source="{StaticResource ImageArrowLeft}"/>
+                <DataTemplate>
+                    <Image Source="{StaticResource ImageArrowLeft}"/>
+                </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style TargetType="Button" x:Key="ButtonArrowShiftRight" BasedOn="{StaticResource ButtonArrowShiftBase}">
         <Setter Property="Template" Value="{StaticResource TemplateButtonArrowShiftRight}"/>
-        <Setter Property="Content">
+        <Setter Property="ContentTemplate">
             <Setter.Value>
-                <Image Source="{StaticResource ImageArrowRight}"/>
+                <DataTemplate>
+                    <Image Source="{StaticResource ImageArrowRight}"/>
+                </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
