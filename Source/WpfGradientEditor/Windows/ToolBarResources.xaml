@@ -11,7 +11,10 @@
     <BitmapImage x:Key="ImageArrowRight" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Arrow.Right.72.png"/>
     <BitmapImage x:Key="ImagePlus" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Plus.72.png"/>
     <BitmapImage x:Key="ImageMinus" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Minus.72.png"/>
-
+    <BitmapImage x:Key="ImageReset" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Reset.72.png"/>
+    <BitmapImage x:Key="ImageClipboard" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Clipboard.72.png"/>
+    <BitmapImage x:Key="ImageSpread" UriSource="/WpfGradientEditor;component/Windows/Images/Image.Spread.72.png"/>
+    
     <!-- HeaderedContentControl used inside a Toolbar -->
     <Style TargetType="HeaderedContentControl">
         <Setter Property="Margin" Value="8,4,8,0"/>
@@ -93,11 +96,12 @@
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
+    <!-- ImageTextButton of a ToolBar -->
     <Style TargetType="xac:ImageTextButton">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="ImageHeight" Value="52"/>
-        <Setter Property="ImageWidth" Value="52"/>
+        <Setter Property="ImageHeight" Value="48"/>
+        <Setter Property="ImageWidth" Value="48"/>
     </Style>
 
 

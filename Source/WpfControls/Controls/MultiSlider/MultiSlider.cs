@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace Xam.Wpf.Controls
 {
+    /// <summary>
+    /// Represents a slider control that can have multiple slider points.
+    /// </summary>
     public class MultiSlider : Control
     {
         #region Public Fields
@@ -35,17 +38,15 @@ namespace Xam.Wpf.Controls
         /// <summary>
         /// Gets the minimum allowed cushion value.
         /// </summary>
-        public const double MinCushion = 0.0;
+        public const double MinCushion = 0.005;
         /// <summary>
         /// Gets the maximum allowed cushion value.
         /// </summary>
-        public const double MaxCushion = 0.25;
+        public const double MaxCushion = 0.100;
         /// <summary>
         /// Gets the default value for the Cushion property.
         /// </summary>
-        public const double DefaultCushion = 0.03;
-
-
+        public const double DefaultCushion = 0.020;
         #endregion
 
         /************************************************************************/
@@ -141,7 +142,7 @@ namespace Xam.Wpf.Controls
                 new PropertyChangedCallback(OnOrientationPropertyChanged)));
 
         /// <summary>
-        /// Gets or sets the orientation of the multi-slider,
+        /// Gets or sets the orientation of the multi-slider.
         /// </summary>
         public Orientation Orientation
         {
@@ -150,7 +151,7 @@ namespace Xam.Wpf.Controls
         }
 
         /// <summary>
-        /// Registers a dependency property as backing store for the Orientation property
+        /// Registers a dependency property as backing store for the IsDirectionReversed property
         /// </summary>
         public static readonly DependencyProperty IsDirectionReversedProperty =
             DependencyProperty.Register("IsDirectionReversed", typeof(bool), typeof(MultiSlider),
@@ -201,15 +202,16 @@ namespace Xam.Wpf.Controls
 
         /************************************************************************/
 
-        #region Events
-
+        #region Routed Events
+        /// <summary>
+        ///  Identifies the SliderSet routed event.
+        /// </summary>
         public static readonly RoutedEvent SliderSetEvent =
             EventManager.RegisterRoutedEvent("SliderSet", RoutingStrategy.Bubble, typeof(MultiSliderSetRoutedEventHandler), typeof(MultiSlider));
 
         /// <summary>
         /// Occurs when the sliders are set. Sliders are set at initialization time, 
-        /// each time the SliderCount property changes, and when Minimum, Maximum, and
-        /// the Cushion properties change.
+        /// each time the SliderCount property changes, and when Minimum, Maximum, or Cushion properties change.
         /// </summary>
         public event MultiSliderSetRoutedEventHandler SliderSet
         {
@@ -223,6 +225,9 @@ namespace Xam.Wpf.Controls
             }
         }
 
+        /// <summary>
+        /// Identifies the ValueChanged routed event.
+        /// </summary>
         public static readonly RoutedEvent ValueChangedEvent = 
             EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(MultiSliderRoutedEventHandler), typeof(MultiSlider));
 
@@ -241,6 +246,9 @@ namespace Xam.Wpf.Controls
             }
         }
 
+        /// <summary>
+        /// Identifies the SliderSelected routed event.
+        /// </summary>
         public static readonly RoutedEvent SliderSelectedEvent =
             EventManager.RegisterRoutedEvent("SliderSelected", RoutingStrategy.Bubble, typeof(MultiSliderRoutedEventHandler), typeof(MultiSlider));
 
@@ -365,7 +373,7 @@ namespace Xam.Wpf.Controls
 
         private void SupportiveSliderSupportiveValueChanged(object sender, EventArgs e)
         {
-            RaiseSliderValueChangedEvent((SupportiveSlider)sender);
+            RaiseValueChangedEvent((SupportiveSlider)sender);
         }
 
         private void MultiSliderSliderGotMouseCapture(object sender, System.Windows.Input.MouseEventArgs e)
@@ -386,29 +394,17 @@ namespace Xam.Wpf.Controls
             }
         }
 
+        /// <summary>
+        /// Recalibrate the sliders in response to parameter change, Minimum, Maximum, or Cushion.
+        /// TODO: Support Cushion change. Currently, if the cushion is increased while two sliders
+        /// are within a smaller cushion value, they don't spread apart.
+        /// </summary>
         private void RecalibrateSliders()
         {
-            Debug.WriteLine("** Recalibrate **");
-
-            if (sliders[0].Minimum != Minimum)
-            {
-                Debug.WriteLine("************ Minimum");
-            }
-            if (sliders[0].Maximum != Maximum)
-            {
-                Debug.WriteLine("************ Maximum");
-            }
-
             List<double> percent = new List<double>();
             for (int j = 0; j < SliderCount; j++)
             {
                 percent.Add(sliders[j].ValuePercentage);
-                Debug.WriteLine("{0}. % {1}, Min {2} Max {3} Value {4}", 
-                    sliders[j].Position, 
-                    percent[j], 
-                    sliders[j].Minimum, 
-                    sliders[j].Maximum, 
-                    sliders[j].Value);
             }
 
             foreach (var s in sliders)
@@ -416,45 +412,45 @@ namespace Xam.Wpf.Controls
                 s.SuspendValueChanged();
                 s.Minimum = Minimum;
                 s.Maximum = Maximum;
+                s.Cushion = Cushion;
                 s.ResumeValueChanged();
             }
 
-            Debug.WriteLine("** Now put precentage back");
             for (int j = 0; j < SliderCount; j++)
             {
                 sliders[j].SuspendValueChanged();
                 sliders[j].ValuePercentage = percent[j];
                 sliders[j].ResumeValueChanged();
-
-                Debug.WriteLine("{0}. % {1}, Min {2} Max {3} Value {4}",
-                    sliders[j].Position,
-                    sliders[j].ValuePercentage,
-                    sliders[j].Minimum,
-                    sliders[j].Maximum,
-                    sliders[j].Value);
             }
 
-            //SpreadSliders();
             RaiseSliderSetEvent();
         }
 
+        /// <summary>
+        /// Raises the SliderSet event.
+        /// </summary>
         private void RaiseSliderSetEvent()
         {
-            // Note: SliderCount property returns only [sliderCount] values.
             var mve = new MultiSliderSetRoutedEventArgs(SliderSetEvent, SliderValues);
             RaiseEvent(mve);
         }
 
-        private void RaiseSliderValueChangedEvent(SupportiveSlider s)
+        /// <summary>
+        /// Raises the ValueChanged event.
+        /// </summary>
+        /// <param name="s">The slider that changed its value.</param>
+        private void RaiseValueChangedEvent(SupportiveSlider s)
         {
-            // Note: SliderCount property returns only [sliderCount] values.
             var mve = new MultiSliderRoutedEventArgs(ValueChangedEvent, SliderValues, s.Position);
             RaiseEvent(mve);
         }
 
+        /// <summary>
+        /// Raises the SliderSelected event.
+        /// </summary>
+        /// <param name="s">The slider that was selected.</param>
         private void RaiseSliderSelectedEvent(SupportiveSlider s)
         {
-            // Note: SliderCount property returns only [sliderCount] values.
             var mve = new MultiSliderRoutedEventArgs(SliderSelectedEvent, SliderValues, s.Position);
             RaiseEvent(mve);
         }
@@ -505,7 +501,6 @@ namespace Xam.Wpf.Controls
             MultiSlider ms = (MultiSlider)d;
             ms.CoerceValue(MinimumProperty);
             ms.RecalibrateSliders();
-
         }
 
         private static object MaximumPropertyCoerce(DependencyObject d, object value)
@@ -529,6 +524,8 @@ namespace Xam.Wpf.Controls
 
         private static void OnCushionPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            MultiSlider ms = (MultiSlider)d;
+            ms.RecalibrateSliders();
         }
 
         private static void OnOrientationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

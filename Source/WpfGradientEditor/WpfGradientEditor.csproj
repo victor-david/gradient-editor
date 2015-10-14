@@ -176,6 +176,15 @@
     <Resource Include="Windows\Images\Image.Minus.72.png" />
     <Resource Include="Windows\Images\Image.Plus.72.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\Image.Clipboard.72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\Image.Reset.72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\Images\Image.Spread.72.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

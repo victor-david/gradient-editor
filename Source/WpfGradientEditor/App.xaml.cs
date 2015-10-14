@@ -19,7 +19,7 @@ namespace Xam.Applications.GradientEditor
             Window main = new MainWindow();
             MainWindowViewModel mainViewModel = new MainWindowViewModel();
             main.DataContext = mainViewModel;
-            main.Width = Math.Min(System.Windows.SystemParameters.WorkArea.Width, 1076.0);
+            main.Width = Math.Min(System.Windows.SystemParameters.WorkArea.Width, 1176.0);
             main.Height = Math.Min(System.Windows.SystemParameters.WorkArea.Height, 822.0);
             main.Show();
         }

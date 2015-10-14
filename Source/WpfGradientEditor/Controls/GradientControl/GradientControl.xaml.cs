@@ -509,8 +509,6 @@ namespace Xam.Applications.GradientEditor.Controls
             Clipboard.SetText(XamlOutput);
             OperationMessage = Strings.OperationMessageXamlCopiedToClipboard;
         }
-
-
         #endregion
     }
 }

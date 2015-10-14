@@ -67,17 +67,19 @@
                         <StackPanel Orientation="Horizontal">
                             <xac:ImageTextButton
                                 Text="Spread"
-                                ImageSource="{x:Null}"
+                                ImageSource="{StaticResource ImageSpread}"
                                 Command="{Binding ElementName=GradControl, Path=SpreadGradientStopsCommand}"
                                 ToolTip="{Binding ElementName=GradControl, Path=SpreadGradientStopsCommand.Description}"/>
                             
                             <xac:ImageTextButton
                                 Text="Reset"
+                                ImageSource="{StaticResource ImageReset}"
                                 Command="{Binding ElementName=GradControl, Path=ResetCommand}"
                                 ToolTip="{Binding ElementName=GradControl, Path=ResetCommand.Description}"/>
 
                             <xac:ImageTextButton
                                 Text="Copy Xaml"
+                                ImageSource="{StaticResource ImageClipboard}"
                                 Command="{Binding ElementName=GradControl, Path=CopyXamlCommand}"
                                 ToolTip="{Binding ElementName=GradControl, Path=CopyXamlCommand.Description}"/>
                         </StackPanel>

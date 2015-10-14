@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace Xam.Wpf.Controls
 {
+    /// <summary>
+    /// Represents a slider within the MultiSlider control.
+    /// </summary>
     internal class SupportiveSlider : Slider
     {
         #region Private vars
@@ -97,8 +100,11 @@ namespace Xam.Wpf.Controls
             get { return cushion; }
             set
             {
-                cushion = value;
-                CalculateCushionValue();
+                if (value != cushion)
+                {
+                    cushion = value;
+                    CalculateCushionValue();
+                }
             }
         }
 
@@ -126,15 +132,6 @@ namespace Xam.Wpf.Controls
                 Value = Minimum + ((Maximum - Minimum) * value);
             }
         }
-
-        ///// <summary>
-        ///// Gets or sets the last value this slider had before the ValueChanged event fired.
-        ///// </summary>
-        //public double LastValue
-        //{
-        //    get;
-        //    set;
-        //}
         #endregion
 
         /************************************************************************/
@@ -146,7 +143,6 @@ namespace Xam.Wpf.Controls
             this.owner = owner;
             Position = position;
             lastValue = Double.NaN;
-            //ValueChanged += new RoutedPropertyChangedEventHandler<double>(SupportiveSliderValueChanged);
         }
         #endregion
 
@@ -176,7 +172,6 @@ namespace Xam.Wpf.Controls
         {
             ConstrainValue(Value - 0.1, Value);
             ConstrainValue(Value + 0.1, Value);
-
         }
         #endregion
 
@@ -236,7 +231,6 @@ namespace Xam.Wpf.Controls
             }
             if (Value != lastValue)
             {
-                
                 lastValue = Value;
                 RaiseSupportiveValueChangedEvent();
             }
@@ -244,32 +238,19 @@ namespace Xam.Wpf.Controls
 
         private void ConstrainToLower()
         {
-            Debug.Write("#" + Position.ToString());
-            Debug.Write(". Constrain to Lower: ");
             if (LowerPeer != null && Value < LowerPeer.Value + cushionValue)
             {
                 Value = LowerPeer.Value + cushionValue;
-                Debug.Write(" changed to: " + Value.ToString());
             }
-            else
-                Debug.Write(" no constraint");
-            Debug.WriteLine(" **");
-
         }
 
         private void ConstrainToUpper()
         {
-            Debug.Write("#" + Position.ToString());
-            Debug.Write(". Constrain to Upper: ");
             if (Position < owner.SliderCount - 1 && UpperPeer != null && Value > UpperPeer.Value - cushionValue)
             {
                 
                 Value = UpperPeer.Value - cushionValue;
-                Debug.Write(" changed to: " + Value.ToString());
             }
-            else
-                Debug.Write(" no constraint");
-            Debug.WriteLine(" **");
         }
 
         private void RaiseSupportiveValueChangedEvent()
@@ -281,25 +262,10 @@ namespace Xam.Wpf.Controls
             }
         }
 
-
-        //private void SupportiveSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    // Prevent re-entry if we need to constrain a value
-        //    if (!isSuspendedValueChanged && !isInProgressValueChanged)
-        //    {
-        //        isInProgressValueChanged = true;
-        //        ConstrainValue();
-        //        double cushion = (Maximum - Minimum) * Cushion;
-
-        //        isInProgressValueChanged = false;
-        //    }
-        //}
-
         private void CalculateCushionValue()
         {
             cushionValue = (Maximum - Minimum) * cushion;
         }
-
         #endregion
     }
 }

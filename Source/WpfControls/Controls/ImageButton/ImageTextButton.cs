@@ -8,6 +8,9 @@ using System.Windows.Media;
 
 namespace Xam.Wpf.Controls
 {
+    /// <summary>
+    /// Represents a Button control that accepts an image and text.
+    /// </summary>
     public class ImageTextButton : Button
     {
         #region Properties
