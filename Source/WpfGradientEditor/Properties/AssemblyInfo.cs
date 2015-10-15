@@ -11,9 +11,9 @@ using System.Windows.Markup;
 [assembly: AssemblyTitle("Wpf Gradient Editor")]
 [assembly: AssemblyDescription("Provides visual construction and preview of various linear gradient brushes for use in a WPF application.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Restless Animal Productions")]
+[assembly: AssemblyCompany("Restless Animal")]
 [assembly: AssemblyProduct("Wpf Gradient Editor")]
-[assembly: AssemblyCopyright("Produced by Restless Animal Productions 2015, freely available to all")]
+[assembly: AssemblyCopyright("Restless Animal 2015, freely available to all")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

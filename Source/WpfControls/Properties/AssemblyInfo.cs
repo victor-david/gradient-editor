@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Wpf Controls Library")]
 [assembly: AssemblyDescription("Provides custom WPF controls")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Restless Animal Productions")]
+[assembly: AssemblyCompany("Restless Animal")]
 [assembly: AssemblyProduct("WpfControlsLibrary")]
-[assembly: AssemblyCopyright("Copyright © Restless Animal Productions 2015")]
+[assembly: AssemblyCopyright("Copyright © Restless Animal 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

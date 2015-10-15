@@ -44,21 +44,31 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ImageButton\ImageTextButton.cs" />
-    <Compile Include="Controls\MultiSlider\SlidersSetRoutedEventHandler.cs" />
-    <Compile Include="Controls\MultiSlider\MultiSliderSetRoutedEventArgs.cs" />
-    <Compile Include="Controls\MultiSlider\MultiSliderRoutedEventHandler.cs" />
-    <Compile Include="Controls\MultiSlider\MultiSlider.cs" />
-    <Compile Include="Controls\MultiSlider\MultiSliderRoutedEventArgs.cs" />
-    <Compile Include="Controls\MultiSlider\SupportiveSlider.cs" />
+    <Compile Include="Controls\ImageButton\Implementation\ImageTextButton.cs" />
+    <Compile Include="Controls\MultiSlider\Implementation\SlidersSetRoutedEventHandler.cs" />
+    <Compile Include="Controls\MultiSlider\Implementation\MultiSliderSetRoutedEventArgs.cs" />
+    <Compile Include="Controls\MultiSlider\Implementation\MultiSliderRoutedEventHandler.cs" />
+    <Compile Include="Controls\MultiSlider\Implementation\MultiSlider.cs" />
+    <Compile Include="Controls\MultiSlider\Implementation\MultiSliderRoutedEventArgs.cs" />
+    <Compile Include="Controls\MultiSlider\Implementation\SupportiveSlider.cs" />
+    <Compile Include="Core\CoreResourceDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ImageButton\Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MultiSlider\Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
