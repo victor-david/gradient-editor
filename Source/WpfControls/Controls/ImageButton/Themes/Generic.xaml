@@ -1,0 +1,55 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lc="clr-namespace:Xam.Wpf.Controls">
+    
+    <Style TargetType="lc:ImageTextButton">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="lc:ImageTextButton">
+                    <Border Name="MainBorder" BorderBrush="Transparent" BorderThickness="1" Padding="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Image 
+                                Name="MainImage"
+                                Source="{TemplateBinding ImageSource}"
+                                Width="{TemplateBinding ImageWidth}"
+                                Height="{TemplateBinding ImageHeight}"/>
+                            <TextBlock
+                                Name="MainTextBlock"
+                                Text="{TemplateBinding Text}"
+                                FontSize="{TemplateBinding FontSize}"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                FontWeight="{TemplateBinding FontWeight}"
+                                Foreground="{TemplateBinding Foreground}" 
+                                Margin="5,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" 
+                            />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background" Value="#C2E0FF"/>
+                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="#3399FF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background" Value="#99CCFF"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="MainTextBlock" Property="Foreground" Value="#85736D"/>
+                            <Setter TargetName="MainImage" Property="Opacity" Value="0.55"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter TargetName="MainTextBlock" Property="Margin" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="ImageSource" Value="{x:Null}">
+                            <Setter TargetName="MainImage" Property="Width" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

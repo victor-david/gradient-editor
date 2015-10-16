@@ -1,0 +1,138 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lc="clr-namespace:Xam.Wpf.Controls">
+
+    <LinearGradientBrush x:Key="NormalThumbFillBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="White" Offset="0" />
+        <GradientStop Color="#FFEBEBEB" Offset="0.5" />
+        <GradientStop Color="#FFD6D6D6" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MouseOverThumbFillBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="White" Offset="0" />
+        <GradientStop Color="#FFBBE3F9" Offset="0.5" />
+        <GradientStop Color="#FFB1E0F8" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PressedThumbFillBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="White" Offset="0" />
+        <GradientStop Color="#FF5DB2E0" Offset="0.5" />
+        <GradientStop Color="#FF4F93BD" Offset="1" />
+    </LinearGradientBrush>
+
+    <Style x:Key="ThumbFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-2" StrokeThickness="1" Stroke="Black" StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Thumb Template  -->
+    <ControlTemplate TargetType="{x:Type Thumb}" x:Key="ThumbTemplate">
+        <Grid>
+            <Border Name="MainBorder" Background="#070" BorderBrush="DarkGray" BorderThickness="1" Height="15" Width="15" CornerRadius="4"/>
+            <Ellipse Name="CenterDot" Fill="Blue" Height="5" Width="5"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="CenterDot" Property="Fill" Value="#B00" />
+            </Trigger>
+            <Trigger Property="IsMouseCaptureWithin" Value="True">
+                <Setter TargetName="CenterDot" Property="Fill" Value="Yellow" />
+                <Setter TargetName="MainBorder" Property="Height" Value="17"/>
+                <Setter TargetName="MainBorder" Property="Width" Value="17"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type lc:SupportiveSlider}}, Path=IsSelected}"  Value="true">
+                <Setter TargetName="MainBorder" Property="Background" Value="#0A0" />
+                <Setter TargetName="MainBorder" Property="Width" Value="20" />
+                <Setter TargetName="MainBorder" Property="Height" Value="20" />
+                <Setter TargetName="CenterDot" Property="Width" Value="8" />
+                <Setter TargetName="CenterDot" Property="Height" Value="8" />
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate TargetType="lc:SupportiveSlider" x:Key="SupportiveSliderTemplate" >
+        <Grid>
+            <Track x:Name="PART_Track" Grid.Row="0" Orientation="{TemplateBinding Orientation}">
+                <Track.Thumb>
+                    <Thumb x:Name="thumb" 
+                           Focusable="True"
+                           FocusVisualStyle="{StaticResource ThumbFocusVisualStyle}"
+                           Background="{TemplateBinding Background}"
+                           Template="{StaticResource ThumbTemplate}">
+                    </Thumb>
+                </Track.Thumb>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate TargetType="lc:MultiSlider" x:Key="MultiSliderHorizontal">
+        <Border 
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Background="{TemplateBinding Background}">
+
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="lc:SupportiveSlider">
+                        <Setter Property="Template" Value="{StaticResource SupportiveSliderTemplate}"/>
+                        <Setter Property="Grid.Row" Value="1"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="1" BorderBrush="{TemplateBinding TrackBrush}" BorderThickness="2" VerticalAlignment="Center" Height="4" />
+                <Grid x:Name="PART_SliderGrid" Grid.Row="1">
+                    <!-- SupportiveSlider instance get inserted here -->
+                </Grid>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate TargetType="lc:MultiSlider" x:Key="MultiSliderVertical">
+        <Border 
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Background="{TemplateBinding Background}">
+
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="lc:SupportiveSlider">
+                        <Setter Property="Template" Value="{StaticResource SupportiveSliderTemplate}"/>
+                        <Setter Property="Grid.Column" Value="1"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="1" BorderBrush="{TemplateBinding TrackBrush}" BorderThickness="2" HorizontalAlignment="Center" Width="4" />
+                <Grid x:Name="PART_SliderGrid" Grid.Column="1">
+                    <!-- SupportiveSlider instance get inserted here -->
+                </Grid>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="lc:MultiSlider">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template" Value="{StaticResource MultiSliderHorizontal}"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Template" Value="{StaticResource MultiSliderVertical}"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

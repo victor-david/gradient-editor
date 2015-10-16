@@ -121,6 +121,8 @@
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\DoubleGreaterThan05Converter.cs" />
     <Compile Include="Converters\DoubleLessThan05Converter.cs" />
+    <Compile Include="Other\AssemblyInfo.cs" />
+    <Compile Include="Other\AssemblyInfoType.cs" />
     <Compile Include="Other\RelayCommand.cs" />
     <Compile Include="Windows\ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">

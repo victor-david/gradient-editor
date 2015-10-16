@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ * Restless Animal Development
+ * This program is provided freely without restrictions, but please retain this notice in any distributions, modifications ,etc.
+ * http://dev.restlessanimal.com
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,13 +12,12 @@ using System.Windows.Input;
 
 namespace Xam.Applications.GradientEditor
 {
-
     public class RelayCommand : ICommand
     {
         #region Private vars
         readonly Action<object> execute;
         readonly Predicate<object> canExecute;
-        private EventHandler _internalCanExecuteChanged;
+        private EventHandler internalCanExecuteChanged;
         #endregion
 
         /************************************************************************/
@@ -32,7 +36,7 @@ namespace Xam.Applications.GradientEditor
 
         #region Public Properties
         /// <summary>
-        /// Gets the description of this command
+        /// Gets the description of this command.
         /// </summary>
         public string Description
         {
@@ -55,12 +59,12 @@ namespace Xam.Applications.GradientEditor
         {
             add
             {
-                _internalCanExecuteChanged += value;
+                internalCanExecuteChanged += value;
                 CommandManager.RequerySuggested += value;
             }
             remove
             {
-                _internalCanExecuteChanged -= value;
+                internalCanExecuteChanged -= value;
                 CommandManager.RequerySuggested -= value;
             }
         }
@@ -70,7 +74,6 @@ namespace Xam.Applications.GradientEditor
             execute(parameter);
         }
 
-
         /// <summary>
         /// This method can be used to raise the CanExecuteChanged handler.
         /// This will force WPF to re-query the status of this command directly.
@@ -78,7 +81,9 @@ namespace Xam.Applications.GradientEditor
         public void RaiseCanExecuteChanged()
         {
             if (canExecute != null)
+            {
                 OnCanExecuteChanged();
+            }
         }
 
         /// <summary>
@@ -87,9 +92,11 @@ namespace Xam.Applications.GradientEditor
         /// </summary>
         protected virtual void OnCanExecuteChanged()
         {
-            EventHandler eCanExecuteChanged = _internalCanExecuteChanged;
+            EventHandler eCanExecuteChanged = internalCanExecuteChanged;
             if (eCanExecuteChanged != null)
+            {
                 eCanExecuteChanged(this, EventArgs.Empty);
+            }
         }
         #endregion
     }

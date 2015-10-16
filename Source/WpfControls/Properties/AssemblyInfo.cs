@@ -1,4 +1,9 @@
-﻿using System.Reflection;
+﻿/**
+ * Restless Animal Development
+ * This program is provided freely without restrictions, but please retain this notice in any distributions, modifications ,etc.
+ * http://dev.restlessanimal.com
+ */
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Markup;
@@ -10,9 +15,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Wpf Controls Library")]
 [assembly: AssemblyDescription("Provides custom WPF controls")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Restless Animal Productions")]
+[assembly: AssemblyCompany("Restless Animal")]
 [assembly: AssemblyProduct("WpfControlsLibrary")]
-[assembly: AssemblyCopyright("Copyright © Restless Animal Productions 2015")]
+[assembly: AssemblyCopyright("Copyright © Restless Animal 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -25,12 +30,12 @@ using System.Windows;
 [assembly: Guid("78d6116b-ec07-4769-80ef-59a2be2e4b0f")]
 
 [assembly: ThemeInfo(
-    ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
-    //(used if a resource is not found in the page, 
-    // or application resource dictionaries)
-    ResourceDictionaryLocation.SourceAssembly //where the generic resource dictionary is located
-    //(used if a resource is not found in the page, 
-    // app, or any theme specific resource dictionaries)
+    // Location of theme specific resource dictionaries,
+    // used if a resource is not found in the page, or in application resource dictionaries.
+    ResourceDictionaryLocation.SourceAssembly,
+    // Location of the generic resource dictionary,
+    // used if a resource is not found in the page, app, or any theme specific resource dictionaries.
+    ResourceDictionaryLocation.SourceAssembly
 )]
 
 
