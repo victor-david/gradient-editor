@@ -1,4 +1,9 @@
-﻿using System.Reflection;
+﻿/**
+ * Restless Animal Development
+ * This program is provided freely without restrictions, but please retain this notice in any distributions, modifications ,etc.
+ * http://dev.restlessanimal.com
+ */
+using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -31,14 +36,13 @@ using System.Windows.Markup;
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
-
 [assembly: ThemeInfo(
-    ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
-    //(used if a resource is not found in the page, 
-    // or application resource dictionaries)
-    ResourceDictionaryLocation.SourceAssembly //where the generic resource dictionary is located
-    //(used if a resource is not found in the page, 
-    // app, or any theme specific resource dictionaries)
+    // Location of theme specific resource dictionaries,
+    // used if a resource is not found in the page, or in application resource dictionaries.
+    ResourceDictionaryLocation.SourceAssembly,
+    // Location of the generic resource dictionary,
+    // used if a resource is not found in the page, app, or any theme specific resource dictionaries.
+    ResourceDictionaryLocation.SourceAssembly
 )]
 
 
@@ -55,6 +59,6 @@ using System.Windows.Markup;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.0.0")]
-[assembly: AssemblyFileVersion("3.0.0.0")]
+[assembly: AssemblyVersion("3.0.1.0")]
+[assembly: AssemblyFileVersion("3.0.1.0")]
 [assembly: GuidAttribute("98300783-db00-4255-80c2-0d3af1a893dc")]

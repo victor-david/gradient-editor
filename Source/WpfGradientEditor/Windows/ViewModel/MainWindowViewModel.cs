@@ -1,4 +1,9 @@
-﻿using System;
+﻿/**
+ * Restless Animal Development
+ * This program is provided freely without restrictions, but please retain this notice in any distributions, modifications ,etc.
+ * http://dev.restlessanimal.com
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +40,8 @@ namespace Xam.Applications.GradientEditor.ViewModel
         #region Constructor
         public MainWindowViewModel()
         {
-            DisplayTitle = "Wpf Gradient Editor 3.0";
+            var ai = new AssemblyInfo(AssemblyInfoType.Entry);
+            DisplayTitle = String.Format("{0} {1}", ai.Title, ai.VersionMajor);
         }
         #endregion
 

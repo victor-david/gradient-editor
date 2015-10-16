@@ -16,8 +16,8 @@ from the Extended WPF Toolkit™ Community Edition project and use those.
 This screenshot shows the editing of a linear gradient brush that has 8 gradient stops.
 Some of the bands represented by the stops been resized to be smaller or larger than the initial default.
 
-![WPF Gradient Editor Screenshot 3](http://media.victordavid.com/img/wpfge/screenshot3.png)
+![WPF Gradient Editor Screenshot 3](http://dev.restlessanimal.com/resources/img/wpfge/screenshot3.png)
 
 This screenshot shows how the start and end point sliders have been adjusted to create a linear brush in another direction. 
 
-![WPF Gradient Editor Screenshot 4](http://media.victordavid.com/img/wpfge/screenshot4.png)
+![WPF Gradient Editor Screenshot 4](http://dev.restlessanimal.com/resources/img/wpfge/screenshot4.png)
