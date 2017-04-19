@@ -1,8 +1,8 @@
-#README
+# README
 
 **WPF Gradient Editor** is a WPF application that enables you to preview and create linear gradient brushes for use in a WPF application.
 
-##Easy Setup
+## Easy Setup
 
 This project uses three binaries: **WpfGradientEditor.exe**, **Xam.Wpf.Controls.dll** and **Xceed.Wpf.Toolkit.dll**. You just need to put them together in a folder.
 
@@ -11,7 +11,7 @@ from the source code provided by the [Extended WPF Toolkit™ Community Edition]
 project. Nothing was changed in their source code. However, if you prefer, you may download the source code (or the binaries)
 from the Extended WPF Toolkit™ Community Edition project and use those.
 
-##Screenshots
+## Screenshots
 
 This screenshot shows the editing of a linear gradient brush that has 8 gradient stops.
 Some of the bands represented by the stops been resized to be smaller or larger than the initial default.
