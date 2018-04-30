@@ -1,2 +1,9 @@
+*.suo
+obj/
+bin/
+Docs/
+Help/
+packages/
+.vs/
 install.cmd
 pack-binaries.cmd
