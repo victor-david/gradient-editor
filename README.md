@@ -1,4 +1,4 @@
-# README
+# Gradient Editor
 
 **WPF Gradient Editor** is a WPF application that enables you to preview and create linear gradient brushes for use in a WPF application.
 
