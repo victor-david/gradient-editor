@@ -1,13 +1,8 @@
 ﻿/**
  * Restless Animal Development
  * This program is provided freely without restrictions, but please retain this notice in any distributions, modifications ,etc.
- * http://dev.restlessanimal.com
+ * https://restlessanimal.com
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
 
 namespace Xam.Wpf.Controls
 {

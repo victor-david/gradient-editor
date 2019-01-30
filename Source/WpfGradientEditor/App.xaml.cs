@@ -1,13 +1,9 @@
 ﻿/**
  * Restless Animal Development
  * This program is provided freely without restrictions, but please retain this notice in any distributions, modifications ,etc.
- * http://dev.restlessanimal.com
+ * https://restlessanimal.com
  */
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Windows;
 using Xam.Applications.GradientEditor.ViewModel;
 
