@@ -1,9 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGradientEditor", "WpfGradientEditor\WpfGradientEditor.csproj", "{6D514F05-431B-4746-BD7D-7A6E5EFDCB14}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradientEditor", "GradientEditor\GradientEditor.csproj", "{6D514F05-431B-4746-BD7D-7A6E5EFDCB14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControls", "WpfControls\WpfControls.csproj", "{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradientEditor.Controls", "GradientEditor.Controls\GradientEditor.Controls.csproj", "{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D11D3E30-933A-4740-B882-0A2A2C877272}
 	EndGlobalSection
 EndGlobal

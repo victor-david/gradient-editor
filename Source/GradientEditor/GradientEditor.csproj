@@ -166,12 +166,6 @@
     <Resource Include="Windows\Images\Image.Arrow.Right.72.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WpfControls\WpfControls.csproj">
-      <Project>{EEAE8C9D-A03E-405C-B3DA-39F81EB93A3D}</Project>
-      <Name>WpfControls</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Windows\Images\Image.Minus.72.png" />
     <Resource Include="Windows\Images\Image.Plus.72.png" />
   </ItemGroup>
@@ -186,6 +180,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GradientEditor.Controls\GradientEditor.Controls.csproj">
+      <Project>{eeae8c9d-a03e-405c-b3da-39f81eb93a3d}</Project>
+      <Name>GradientEditor.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
