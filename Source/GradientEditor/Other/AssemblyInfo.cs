@@ -6,7 +6,7 @@
 using System;
 using System.Reflection;
 
-namespace Xam.Applications.GradientEditor
+namespace Restless.App.GradientEditor
 {
     /// <summary>
     /// Provides convienent access to assembly information.

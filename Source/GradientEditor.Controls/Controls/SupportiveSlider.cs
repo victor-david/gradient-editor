@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Xam.Wpf.Controls
+namespace Restless.GradientEditor.Controls
 {
     /// <summary>
     /// Represents a slider within the MultiSlider control.

@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Xam.Applications.GradientEditor
+namespace Restless.App.GradientEditor
 {
     public class BooleanToVisibilityConverter : IValueConverter
     {

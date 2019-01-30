@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace Xam.Wpf.Controls
+namespace Restless.GradientEditor.Controls
 {
     /// <summary>
     /// Represents the arguments for the MultiSlider.SliderSet event.

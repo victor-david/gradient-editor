@@ -3,6 +3,7 @@
  * This program is provided freely without restrictions, but please retain this notice in any distributions, modifications ,etc.
  * https://restlessanimal.com
  */
+using Restless.GradientEditor.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +11,8 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Xam.Wpf.Controls;
 
-namespace Xam.Applications.GradientEditor.Controls
+namespace Restless.App.GradientEditor.Controls
 {
     /// <summary>
     /// Interaction logic for GradientControl.xaml

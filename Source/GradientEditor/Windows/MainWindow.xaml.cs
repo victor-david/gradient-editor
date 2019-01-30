@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Xam.Applications.GradientEditor
+namespace Restless.App.GradientEditor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

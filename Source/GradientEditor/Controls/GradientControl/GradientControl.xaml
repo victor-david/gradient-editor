@@ -1,11 +1,11 @@
 ﻿<UserControl 
-    x:Class="Xam.Applications.GradientEditor.Controls.GradientControl"
+    x:Class="Restless.App.GradientEditor.Controls.GradientControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:lc="clr-namespace:Xam.Applications.GradientEditor.Controls"
-    xmlns:xac="http://schemas.xam.com/wpf/xaml/controls"
+    xmlns:lc="clr-namespace:Restless.App.GradientEditor.Controls"
+    xmlns:xac="http://schemas.restless.com/xaml/controls"
     xmlns:xc="http://schemas.xceed.com/wpf/xaml/toolkit"
     mc:Ignorable="d" 
     d:DesignHeight="380" d:DesignWidth="536">

@@ -5,9 +5,9 @@
  */
 using System;
 using System.Windows;
-using Xam.Applications.GradientEditor.ViewModel;
+using Restless.App.GradientEditor.ViewModel;
 
-namespace Xam.Applications.GradientEditor
+namespace Restless.App.GradientEditor
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -20,8 +20,8 @@ namespace Xam.Applications.GradientEditor
             Window main = new MainWindow();
             MainWindowViewModel mainViewModel = new MainWindowViewModel();
             main.DataContext = mainViewModel;
-            main.Width = Math.Min(System.Windows.SystemParameters.WorkArea.Width, 1176.0);
-            main.Height = Math.Min(System.Windows.SystemParameters.WorkArea.Height, 822.0);
+            main.Width = Math.Min(SystemParameters.WorkArea.Width, 1400.0);
+            main.Height = Math.Min(SystemParameters.WorkArea.Height, 822.0);
             main.Show();
         }
 

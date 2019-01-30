@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
 
-namespace Xam.Applications.GradientEditor.Controls
+namespace Restless.App.GradientEditor.Controls
 {
     /// <summary>
     /// Provides helper services for managing gradient bands and current band selection.

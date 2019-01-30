@@ -6,7 +6,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Xam.Applications.GradientEditor.ViewModel
+namespace Restless.App.GradientEditor.ViewModel
 {
     /// <summary>
     /// Provides the logic for MainWindow.

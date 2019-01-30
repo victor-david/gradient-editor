@@ -18,7 +18,7 @@ using System.Windows.Markup;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Restless Animal")]
 [assembly: AssemblyProduct("Wpf Gradient Editor")]
-[assembly: AssemblyCopyright("Restless Animal 2015, freely available to all")]
+[assembly: AssemblyCopyright("Restless Animal 2018, freely available to all")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -46,8 +46,8 @@ using System.Windows.Markup;
 )]
 
 
-[assembly: XmlnsPrefix("http://schemas.xam.com/wpf/apps/xaml/controls", "lc")]
-[assembly: XmlnsDefinition("http://schemas.xam.com/wpf/apps/xaml/controls", "Xam.Applications.GradientEditor.Controls")]
+[assembly: XmlnsPrefix("http://schemas.restless.com/wpf/apps/xaml/controls", "lc")]
+[assembly: XmlnsDefinition("http://schemas.restless.com/wpf/apps/xaml/controls", "Restless.App.GradientEditor.Controls")]
 
 // Version information for an assembly consists of the following four values:
 //

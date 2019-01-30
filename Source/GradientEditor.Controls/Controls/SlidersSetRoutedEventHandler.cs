@@ -4,7 +4,7 @@
  * https://restlessanimal.com
  */
 
-namespace Xam.Wpf.Controls
+namespace Restless.GradientEditor.Controls
 {
     /// <summary>
     /// Represents the delegate for the SliderSet routed event.

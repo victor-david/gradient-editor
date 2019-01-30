@@ -1,7 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:lc="clr-namespace:Xam.Wpf.Controls">
+    xmlns:lc="clr-namespace:Restless.GradientEditor.Controls">
     
     <Style TargetType="lc:ImageTextButton">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>

@@ -6,7 +6,7 @@
 using System;
 using System.Windows.Data;
 
-namespace Xam.Applications.GradientEditor
+namespace Restless.App.GradientEditor
 {
     public class DoubleLessThan05Converter : IValueConverter
     {

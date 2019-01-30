@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace Xam.Wpf.Controls
+namespace Restless.GradientEditor.Controls
 {
     /// <summary>
     /// Represents the arguments for the MultiSlider events that involve a single position on the MultiSlider.

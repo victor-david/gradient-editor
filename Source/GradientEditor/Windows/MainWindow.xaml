@@ -1,9 +1,9 @@
 ﻿<Window 
-    x:Class="Xam.Applications.GradientEditor.MainWindow"
+    x:Class="Restless.App.GradientEditor.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:xac="http://schemas.xam.com/wpf/xaml/controls"
-    xmlns:lc="clr-namespace:Xam.Applications.GradientEditor.Controls"
+    xmlns:xac="http://schemas.restless.com/xaml/controls"
+    xmlns:lc="clr-namespace:Restless.App.GradientEditor.Controls"
     Title="{Binding Path=DisplayTitle,Mode=OneWay}" 
     FontFamily="Verdana"
     WindowStartupLocation="CenterScreen"

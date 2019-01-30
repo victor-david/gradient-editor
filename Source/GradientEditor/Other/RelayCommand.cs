@@ -7,7 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace Xam.Applications.GradientEditor
+namespace Restless.App.GradientEditor
 {
     public class RelayCommand : ICommand
     {

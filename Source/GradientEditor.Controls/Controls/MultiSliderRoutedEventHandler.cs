@@ -4,7 +4,7 @@
  * https://restlessanimal.com
  */
 
-namespace Xam.Wpf.Controls
+namespace Restless.GradientEditor.Controls
 {
     /// <summary>
     /// Represents the delegate for for the MultiSlider events that involve a single position on the MultiSlider.

@@ -12,12 +12,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Wpf Controls Library")]
+[assembly: AssemblyTitle("Restless Gradient Editor Controls")]
 [assembly: AssemblyDescription("Provides custom WPF controls")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Restless Animal")]
-[assembly: AssemblyProduct("WpfControlsLibrary")]
-[assembly: AssemblyCopyright("Copyright © Restless Animal 2015")]
+[assembly: AssemblyProduct("Restless Gradient Editor Controls")]
+[assembly: AssemblyCopyright("Copyright © Restless Animal 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -39,8 +39,8 @@ using System.Windows;
 )]
 
 
-[assembly: XmlnsPrefix("http://schemas.xam.com/wpf/xaml/controls", "xac")]
-[assembly: XmlnsDefinition("http://schemas.xam.com/wpf/xaml/controls", "Xam.Wpf.Controls")]
+[assembly: XmlnsPrefix("http://schemas.restless.com/xaml/controls", "xac")]
+[assembly: XmlnsDefinition("http://schemas.restless.com/xaml/controls", "Restless.GradientEditor.Controls")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -52,5 +52,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.5.0.0")]
+[assembly: AssemblyFileVersion("1.5.0.0")]

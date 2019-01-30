@@ -1,11 +1,10 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:core="clr-namespace:Xam.Wpf.Controls.Core">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <core:CoreResourceDictionary SourcePath="Controls/ImageButton/Themes/Generic.xaml"/>
-        <core:CoreResourceDictionary SourcePath="Controls/MultiSlider/Themes/Generic.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/GradientEditor.Controls;component/Themes/Generic/ImageTextButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/GradientEditor.Controls;component/Themes/Generic/Slider.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

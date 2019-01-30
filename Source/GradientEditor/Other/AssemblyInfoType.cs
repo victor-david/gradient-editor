@@ -4,7 +4,7 @@
  * https://restlessanimal.com
  */
 
-namespace Xam.Applications.GradientEditor
+namespace Restless.App.GradientEditor
 {
     /// <summary>
     /// Provides an enumeration for instaniating an AssemblyInfo object.
