@@ -7,5 +7,5 @@
 
 This screenshot shows the editing of a linear gradient brush that has 4 gradient stops.
 
-![Gradient Editor Screenshot](https://content.balticsoap.com/asset/domain/restlessanimal.com/img/gradient.editor/gradient.editor.1.jpg)
+![Gradient Editor Screenshot](https://balticsoap.com/asset/restlessanimal.com/img/gradient.editor/gradient.editor.1.jpg)
 
